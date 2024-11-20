@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  web_segmentacion:
+    image: nginx:stable-alpine3.19-slim
+    container_name: web_segmentacion
+    volumes:
+      - ./client/dist:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - red-gane-int
+
+  api_segmentacion:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: api_segmentacion
+    image: api-segmentacion-v1.0
+    networks:
+      - red-gane-int
+    environment:
+      - TZ=America/Bogota
+      
+networks:
+  red-gane-int:
+    external: true
