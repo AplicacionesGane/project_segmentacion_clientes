@@ -45,7 +45,7 @@ export default function ReportesPage() {
     <section className='relative flex flex-col'>
 
       <div className='w-full flex gap-4 px-2 pt-1 items-center border-b pb-2'>
-      <button onClick={() => setVisible2(!visible2)}
+      <button onClick={() => setVisible(!visible2)}
           className={`${visible2 ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600'} text-white p-2 rounded-md w-40`} >
           {visible2 ? 'Ocultar' : 'Fecha Inicial'}
         </button>
