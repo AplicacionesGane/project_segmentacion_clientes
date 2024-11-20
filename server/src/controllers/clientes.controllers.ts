@@ -12,7 +12,7 @@ export const getAllClients = async (req: Request, res: Response) => {
 
     const { count, rows } = await Client.findAndCountAll({
       where: {
-        DOCUMENTO: { [Op.like]: `%${req.query.search}%` }
+        DOCUMENTO: { [Op.like]: `%${search}%` }
       },
       limit: pageSize,
       offset: offset,
@@ -86,8 +86,6 @@ export const getClientById = async (req: Request, res: Response) => {
 
 export const getClientByFN = async (req: Request, res: Response) => {
   const { FN } = req.body;
-
-  console.log(FN);
 
   try {
     const results = await Client.findAll({
