@@ -77,7 +77,6 @@ export const getReportBaloto = async (req: Request, res: Response) => {
   }
 }
 
-
 export const getClientesGanadores = async (req: Request, res: Response) => {
   const data = req.body;
 
@@ -118,6 +117,8 @@ export const getClientesGanadores = async (req: Request, res: Response) => {
   }
 }
 
+const EvaluarTipoPremio = (tipo: string) => literal(`CASE WHEN TIPOPREMIO IN ('${tipo}') THEN 1 ELSE 0 END`);
+
 export const getReportCobrados = async (req: Request, res: Response) => {
   const data = req.body;
 
@@ -136,29 +137,24 @@ export const getReportCobrados = async (req: Request, res: Response) => {
       attributes: [
         'TERCERO',
         'FECHAPAGO',
-        [literal("COUNT(CASE WHEN TIPOPREMIO IN ('LOCAL') THEN 1 END)"), 'CANT_PREMIOS_CHANCE'],
-        [literal("COUNT(CASE WHEN TIPOPREMIO IN ('ASTRO') THEN 1 END)"), 'CANT_PREMIOS_ASTRO'],
-        [literal("COUNT(CASE WHEN TIPOPREMIO IN ('REMOTO') THEN 1 END)"), 'CANT_PREMIOS_LOTERIA'],
-        [literal("COUNT(CASE WHEN TIPOJUEGO IN ('107') THEN 1 END)"), 'CANT_PREMIOS_RASPE'],
+        [fn('COUNT', EvaluarTipoPremio('LOCAL')), 'CANT_PREMIOS_CHANCE'],
+        [fn('COUNT', EvaluarTipoPremio('ASTRO')), 'CANT_PREMIOS_ASTRO'],
+        [fn('COUNT', EvaluarTipoPremio('REMOTO')), 'CANT_PREMIOS_LOTERIA'],
+        [fn('COUNT', EvaluarTipoPremio('107')), 'CANT_PREMIOS_RASPE'],
         [fn('SUM', col('PREMIO')), 'TOTAL_PREMIOS_COBRADOS'],
       ],
       where: {
         FECHAPAGO: { [Op.between]: [fecha1, fecha2] },
         ZONA: zona,
       },
-      include: [
-        {
-          attributes: ['TIPODOCUMENTO', 'NOMBRES', 'CATEGORIA', 'DIRECCION', 'TELEFONO1'],
-          model: Client,
-          where: {
-            CATEGORIA: { [Op.in]: ['TR', 'CC', 'CI'] },
-          },
-          required: true,
-        },
-      ],
-      group: ['Premios.TERCERO','Premios.PREMIO','Premios.FECHAPAGO','Client.TIPODOCUMENTO','Client.NOMBRES','Client.CATEGORIA','Client.DIRECCION','Client.TELEFONO1',
-      ],
-    });    
+      include: [{
+        attributes: ['TIPODOCUMENTO', 'NOMBRES', 'CATEGORIA', 'DIRECCION', 'TELEFONO1'],
+        model: Client,
+        where: { CATEGORIA: { [Op.in]: ['TR', 'CC', 'CI'] } },
+        required: true,
+      }],
+      group: ['TERCERO', 'FECHAPAGO']
+    });
 
     res.status(200).json(ReportCobrados);
   } catch (error) {
