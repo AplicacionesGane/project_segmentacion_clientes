@@ -136,7 +136,6 @@ export const getReportCobrados = async (req: Request, res: Response) => {
     const ReportCobrados = await Premios.findAll({
       attributes: [
         'TERCERO',
-        'FECHAPAGO',
         [fn('COUNT', EvaluarTipoPremio('LOCAL')), 'CANT_PREMIOS_CHANCE'],
         [fn('COUNT', EvaluarTipoPremio('ASTRO')), 'CANT_PREMIOS_ASTRO'],
         [fn('COUNT', EvaluarTipoPremio('REMOTO')), 'CANT_PREMIOS_LOTERIA'],
@@ -153,7 +152,7 @@ export const getReportCobrados = async (req: Request, res: Response) => {
         where: { CATEGORIA: { [Op.in]: ['TR', 'CC', 'CI'] } },
         required: true,
       }],
-      group: ['TERCERO', 'FECHAPAGO']
+      group: ['TERCERO']
     });
 
     res.status(200).json(ReportCobrados);
