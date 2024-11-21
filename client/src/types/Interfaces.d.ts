@@ -55,3 +55,23 @@ export interface Client {
   DIRECCION: string;
   TELEFONO1: string;
 }
+
+
+export interface ReportPremios {
+  TERCERO:              string;
+  FECHAPAGO:            Date;
+  CANT_PREMIOS_CHANCE:  number;
+  CANT_PREMIOS_ASTRO:   number;
+  CANT_PREMIOS_LOTERIA: number;
+  CANT_PREMIOS_RASPE:   number;
+  TOTAL_PREMIOS_COBRADOS:         number;
+  Client:               ReportClient;
+}
+
+export interface  ReportClient {
+  TIPODOCUMENTO: string;
+  NOMBRES:       string;
+  CATEGORIA:     string;
+  DIRECCION:     string;
+  TELEFONO1:     string;
+}

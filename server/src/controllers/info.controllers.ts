@@ -77,6 +77,7 @@ export const getReportBaloto = async (req: Request, res: Response) => {
   }
 }
 
+
 export const getClientesGanadores = async (req: Request, res: Response) => {
   const data = req.body;
 
@@ -101,13 +102,13 @@ export const getClientesGanadores = async (req: Request, res: Response) => {
         TIPOPREMIO: 'LOCAL',
         ZONA: zona
       },
-      include: [{ 
+      include: [{
         attributes: ['DOCUMENTO', 'NOMBRES', 'DIRECCION', 'TELEFONO1'],
         model: Client,
         required: true
-       }],
-       group: ['DOCUMENTO', 'NOMBRES', 'DIRECCION', 'TELEFONO1'],
-       order: literal('TOTALPREMIOS DESC'),
+      }],
+      group: ['DOCUMENTO', 'NOMBRES', 'DIRECCION', 'TELEFONO1'],
+      order: literal('TOTALPREMIOS DESC'),
     });
 
     res.status(200).json(ReportData);
@@ -116,3 +117,54 @@ export const getClientesGanadores = async (req: Request, res: Response) => {
     res.status(500).json('Internal server error');
   }
 }
+
+export const getReportCobrados = async (req: Request, res: Response) => {
+  const data = req.body;
+
+  const { fecha1, fecha2, zona } = data;
+
+  if (fecha1 === undefined || fecha2 === undefined) {
+    res.status(400).json('Fecha no válida');
+  }
+
+  if (zona === undefined) {
+    res.status(400).json('Zona no válida');
+  }
+
+  try {
+    const ReportCobrados = await Premios.findAll({
+      attributes: [
+        'TERCERO',
+        'FECHAPAGO',
+        [literal("COUNT(CASE WHEN TIPOPREMIO IN ('LOCAL') THEN 1 END)"), 'CANT_PREMIOS_CHANCE'],
+        [literal("COUNT(CASE WHEN TIPOPREMIO IN ('ASTRO') THEN 1 END)"), 'CANT_PREMIOS_ASTRO'],
+        [literal("COUNT(CASE WHEN TIPOPREMIO IN ('REMOTO') THEN 1 END)"), 'CANT_PREMIOS_LOTERIA'],
+        [literal("COUNT(CASE WHEN TIPOJUEGO IN ('107') THEN 1 END)"), 'CANT_PREMIOS_RASPE'],
+        [fn('SUM', col('PREMIO')), 'TOTAL_PREMIOS_COBRADOS'],
+      ],
+      where: {
+        FECHAPAGO: { [Op.between]: [fecha1, fecha2] },
+        ZONA: zona,
+      },
+      include: [
+        {
+          attributes: ['TIPODOCUMENTO', 'NOMBRES', 'CATEGORIA', 'DIRECCION', 'TELEFONO1'],
+          model: Client,
+          where: {
+            CATEGORIA: { [Op.in]: ['TR', 'CC', 'CI'] },
+          },
+          required: true,
+        },
+      ],
+      group: ['Premios.TERCERO','Premios.PREMIO','Premios.FECHAPAGO','Client.TIPODOCUMENTO','Client.NOMBRES','Client.CATEGORIA','Client.DIRECCION','Client.TELEFONO1',
+      ],
+    });    
+
+    res.status(200).json(ReportCobrados);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json('Internal server error');
+  }
+};
+
+
