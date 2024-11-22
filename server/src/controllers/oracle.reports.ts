@@ -1,8 +1,66 @@
 import { connectionOracle } from '../connection/oracledb';
-import { Request,Response } from 'express';
+import { Request, Response } from 'express';
 import { Connection } from 'oracledb';
 
-export const getReportOracle = async (req: Request,res: Response) => {
+const FunBetweenDates = (startDate: string, endDate: string) => {
+`
+  BETWEEN TO_DATE('${startDate}','DD/MM/YYYY') AND TO_DATE('${endDate}','DD/MM/YYYY')
+`;
+}
+
+const localPremios =
+`
+  SELECT 
+    FECHAPAGO, 
+    SERIE || NUMERO AS SERIE, 
+    TOTALPREMIO - RETEFUENTE AS PREMIO, 
+    SUBSTR(LOGINCAJERO, 4) AS VENDEDOR, 
+    HORA, 
+    PUNTO_VTA_PAGO, 
+    1 AS APLICACION 
+  FROM 
+    premiospersonaproveedor
+  WHERE 
+    fechapago ${FunBetweenDates('01/10/2024', '31/10/2024')}
+    AND documentocajero IN (
+      SELECT DISTINCT usuadocu 
+      FROM cerberus.ms_usuario 
+      WHERE grupcodi IN (16, 17)
+    )
+`;
+
+const remotePremios =
+`
+  SELECT 
+    FECHAPAGO, 
+    SERIE || NUMERO AS SERIE, 
+    TOTALPREMIO - RETEFUENTE AS PREMIO, 
+    SUBSTR(LOGINCAJERO, 4) AS VENDEDOR, 
+    HORA, 
+    PUNTO_VTA_PAGO, 
+    2 AS APLICACION 
+  FROM 
+    premiospersonaproveedor@CONSULTAS
+  WHERE 
+    fechapago ${FunBetweenDates('01/10/2024', '31/10/2024')}
+    AND documentocajero IN (
+      SELECT DISTINCT usuadocu 
+      FROM cerberus.ms_usuario 
+      WHERE grupcodi IN (16, 17)
+    )
+    AND SERIE || NUMERO NOT IN (
+      SELECT DISTINCT SERIE || NUMERO 
+      FROM premiospersonaproveedor 
+      WHERE fechapago ${FunBetweenDates('01/10/2024', '31/10/2024')}}
+        AND documentocajero IN (
+          SELECT DISTINCT usuadocu 
+          FROM cerberus.ms_usuario 
+          WHERE grupcodi IN (16, 17)
+        )
+    )
+`;
+
+export const getReportOracle = async (req: Request, res: Response) => {
   let connection: Connection | undefined;
   const pool = await connectionOracle();
 
@@ -14,51 +72,30 @@ export const getReportOracle = async (req: Request,res: Response) => {
 
   try {
     const result = await connection.execute(
-      `
+    `
+      WITH 
+        local_premios AS (${localPremios}),
+        remote_premios AS (${remotePremios})
       SELECT 
-        TT.FECHAPAGO, TT.SERIE, TT.PREMIO, TT.VENDEDOR,
-        UPPER(PE.NOMBRES||' '||PE.APELLIDO1||' '||PE.APELLIDO2) NOMBRES,
-        TT.HORA, TT.PUNTO_VTA_PAGO, TT.APLICACION,
-        DECODE(UN.TRTRIO_CODIGO_COMPUESTO_DE,39629,'YUMBO',39630,'VIJES',39631,'CUMBRE',39632,'JAMUNDI',UN.TRTRIO_CODIGO_COMPUESTO_DE) MUNICIPIO
-      FROM(
-        SELECT 
-          FECHAPAGO, SERIE||NUMERO SERIE, TOTALPREMIO-RETEFUENTE PREMIO, 
-          SUBSTR(LOGINCAJERO,4) VENDEDOR, HORA, PUNTO_VTA_PAGO, 1 APLICACION 
-        FROM 
-          premiospersonaproveedor
-        WHERE 
-          fechapago BETWEEN TO_DATE('01/10/2024','DD/MM/YYYY') AND TO_DATE('31/10/2024','DD/MM/YYYY')
-        AND documentocajero IN(
-          SELECT DISTINCT usuadocu 
-          FROM cerberus.ms_usuario 
-          WHERE grupcodi in (16,17)
-        )
-      UNION ALL
-      SELECT 
-        FECHAPAGO, SERIE||NUMERO, TOTALPREMIO-RETEFUENTE PREMIO, SUBSTR(LOGINCAJERO,4) 
-        VENDEDOR, HORA, PUNTO_VTA_PAGO, 2 APLICACION 
-      FROM 
-        premiospersonaproveedor@CONSULTAS
-      WHERE 
-        fechapago BETWEEN TO_DATE('01/10/2024','DD/MM/YYYY') AND TO_DATE('31/10/2024','DD/MM/YYYY')
-      AND documentocajero IN (
-        SELECT distinct usuadocu 
-        FROM cerberus.ms_usuario 
-        WHERE grupcodi in (16,17)
-        )
-      AND serie||numero not IN (
-        SELECT distinct SERIE||NUMERO 
-        FROM premiospersonaproveedor 
-        WHERE fechapago BETWEEN TO_DATE('01/10/2024','DD/MM/YYYY') AND TO_DATE('31/10/2024','DD/MM/YYYY')
-      AND documentocajero in (
-        SELECT distinct usuadocu 
-        FROM cerberus.ms_usuario
-        WHERE grupcodi in (16,17))))TT,PERSONAS PE,UBICACIONNEGOCIOS UN
-      WHERE PE.DOCUMENTO=TT.VENDEDOR
-        AND UN.TRTRIO_CODIGO=TT.PUNTO_VTA_PAGO
-        AND UN.TRTRIO_CODIGO_COMPUESTO_DE IN (39629,39630,39631)
-        ORDER BY TT.FECHAPAGO,TT.APLICACION
-      `
+        TT.FECHAPAGO, 
+        TT.SERIE, 
+        TT.PREMIO, 
+        TT.VENDEDOR,
+        UPPER(PE.NOMBRES || ' ' || PE.APELLIDO1 || ' ' || PE.APELLIDO2) AS NOMBRES,
+        TT.HORA, 
+        TT.PUNTO_VTA_PAGO, 
+        TT.APLICACION,
+        DECODE(UN.TRTRIO_CODIGO_COMPUESTO_DE, 39629, 'YUMBO', 39630, 'VIJES', 39631, 'CUMBRE', 39632, 'JAMUNDI', UN.TRTRIO_CODIGO_COMPUESTO_DE) AS MUNICIPIO
+      FROM (
+        SELECT * FROM local_premios
+        UNION ALL
+        SELECT * FROM remote_premios
+      ) TT
+      JOIN PERSONAS PE ON PE.DOCUMENTO = TT.VENDEDOR
+      JOIN UBICACIONNEGOCIOS UN ON UN.TRTRIO_CODIGO = TT.PUNTO_VTA_PAGO
+      WHERE UN.TRTRIO_CODIGO_COMPUESTO_DE IN (39629, 39630, 39631)
+      ORDER BY TT.FECHAPAGO, TT.APLICACION
+    `,
     );
     console.log(result.rows?.length);
     res.status(200).json(result);
