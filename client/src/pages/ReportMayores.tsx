@@ -1,9 +1,9 @@
 import { Table, TableHead, TableBody, TableCell, TableHeaderCell, TableRow } from '../components/Table';
-import { ReportPremios } from '../types/Interfaces';
+import { ReportMayores } from '../types/Interfaces';
 import { URL_API_DATA } from '../utils/contanst';
 import { FormEvent, useMemo, useState } from 'react';
 import axios from 'axios';
-import { BottonExporPremios } from '../components/ExportarCobrados';
+import { BottonExporMayores } from '../components/ExportarMayores';
 
 
 export default function ReportesPage() {
@@ -12,7 +12,7 @@ export default function ReportesPage() {
   const [zona, setZona] = useState<string | undefined>(undefined)
   const [filter, setFilter] = useState<string>('')
 
-  const [data, setData] = useState<ReportPremios[]>([]);
+  const [data, setData] = useState<ReportMayores[]>([]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -22,7 +22,7 @@ export default function ReportesPage() {
       return;
     }
 
-    axios.post(`${URL_API_DATA}/reporCobrados`, { fecha1: date1.toString().slice(0, 10), fecha2: date2.toString().slice(0, 10), zona })
+    axios.post(`${URL_API_DATA}/reporMayores`, { fecha1: date1.toString().slice(0, 10), fecha2: date2.toString().slice(0, 10), zona })
       .then(res => {
         console.log(res.data);
         setData(res.data);
@@ -74,7 +74,7 @@ export default function ReportesPage() {
 
         <div>
           {
-            data.length > 0 ? <BottonExporPremios datos={data} /> : null
+            data.length > 0 ? <BottonExporMayores datos={data} /> : null
           }
         </div>
 
@@ -94,15 +94,11 @@ export default function ReportesPage() {
               <TableHeaderCell>Tipo Documento</TableHeaderCell>
               <TableHeaderCell>Documento</TableHeaderCell>
               <TableHeaderCell>Nombres</TableHeaderCell>
-              <TableHeaderCell>Categoria</TableHeaderCell>
-              <TableHeaderCell>Cantidad Premios Chance</TableHeaderCell>
-              <TableHeaderCell>Cantidad Premios Astro</TableHeaderCell>
-              <TableHeaderCell>Cantidad Premios Loteria</TableHeaderCell>
-              <TableHeaderCell>Cantidad Premios Raspe</TableHeaderCell>
-              <TableHeaderCell>Total Premios Cobrados</TableHeaderCell>
-              <TableHeaderCell>Direcion</TableHeaderCell>
-              <TableHeaderCell>Telefono</TableHeaderCell>
-
+              <TableHeaderCell>Serie Kardex</TableHeaderCell>
+              <TableHeaderCell>Serie Consecutivo</TableHeaderCell>
+              <TableHeaderCell>Total Premios</TableHeaderCell>
+              <TableHeaderCell>Codigo dane</TableHeaderCell>
+              <TableHeaderCell>Fecha Pago</TableHeaderCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -112,14 +108,11 @@ export default function ReportesPage() {
                   <TableCell>{item.Client.TIPODOCUMENTO}</TableCell>
                   <TableCell>{item.TERCERO}</TableCell>
                   <TableCell>{item.Client.NOMBRES}</TableCell>
-                  <TableCell>{item.Client.CATEGORIA}</TableCell>
-                  <TableCell>{item.CANT_PREMIOS_CHANCE}</TableCell>
-                  <TableCell>{item.CANT_PREMIOS_ASTRO}</TableCell>
-                  <TableCell>{item.CANT_PREMIOS_LOTERIA}</TableCell>
-                  <TableCell>{item.CANT_PREMIOS_RASPE}</TableCell>
-                  <TableCell>{item.TOTAL_PREMIOS_COBRADOS}</TableCell>
-                  <TableCell>{item.Client.DIRECCION}</TableCell>
-                  <TableCell>{item.Client.TELEFONO1}</TableCell>
+                  <TableCell>{item.SERIE_KARDEX}</TableCell>
+                  <TableCell>{item.SERIE_CONSECUTIVO}</TableCell>
+                  <TableCell>{item.TOTAL_PREMIOS}</TableCell>
+                  <TableCell>{item.COD_DANE}</TableCell>
+                  <TableCell>{item.FECHAPAGO}</TableCell>
                 </TableRow>
               ))
             }

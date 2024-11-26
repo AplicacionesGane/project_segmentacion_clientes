@@ -1,4 +1,4 @@
-import { RiGroupLine, RiGuideFill } from "@remixicon/react";
+import { RiArticleFill, RiGroupLine, RiGuideFill } from "@remixicon/react";
 import { useNavigate } from "react-router-dom";
 
 export default function SeleccionReportes() {
@@ -40,6 +40,18 @@ export default function SeleccionReportes() {
         <div className='flex items-center justify-between'>
           <RiGuideFill size={48} color='white' />
           <button onClick={() => navigate('/reportCobrados')}
+            className='bg-yellow-300 hover:bg-yellow-400 p-2 rounded-md font-semibold'>Ingresar</button>
+        </div>
+      </article>
+
+      <article className='flex flex-col justify-around bg-gradient-to-r from-indigo-900 to-indigo-500 p-4 rounded-md shadow-xl space-y-2'>
+        <h1 className='font-semibold text-2xl text-white'>premios mayores 15UVT</h1>
+        <p className='text-white text-balance'>
+          Genera la información de los premios mayores 15UVT. Se debe seleccionar rango de fechas para la consulta.
+        </p>
+        <div className='flex items-center justify-between'>
+          <RiArticleFill  size={48} color='white' />
+          <button onClick={() => navigate('/reportPremiosMayores')}
             className='bg-yellow-300 hover:bg-yellow-400 p-2 rounded-md font-semibold'>Ingresar</button>
         </div>
       </article>
