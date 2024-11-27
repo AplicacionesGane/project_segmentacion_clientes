@@ -1,5 +1,7 @@
-import { getInfo, getInfo2, getReportBaloto, getClientesGanadores, getReportCobrados, getReportMayores } from '../controllers/info.controllers';
+import { getInfo, getInfo2, getReportBaloto, getClientesGanadores } from '../controllers/info.controllers';
+import { getReportCobrados, getReportLAFT, getReportMayores } from '../controllers/report.controllers';
 import { Router } from "express";
+
 
 export const infoRouter = Router();
 
@@ -14,3 +16,5 @@ infoRouter.post('/reporClientGanadores', getClientesGanadores);
 infoRouter.post('/reporCobrados', getReportCobrados);
 
 infoRouter.post('/reporMayores', getReportMayores);
+
+infoRouter.post('/reporlaft', getReportLAFT);
