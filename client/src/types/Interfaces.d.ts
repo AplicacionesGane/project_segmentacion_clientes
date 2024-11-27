@@ -96,3 +96,22 @@ export enum Tipodocumento {
   Cc = "CC",
   Cemp = "CEMP",
 }
+
+
+export interface ReportLaft {
+  TERCERO:                string;
+  CANT_PREMIOS_CHANCE:    number;
+  CANT_PREMIOS_ASTRO:     number;
+  CANT_PREMIOS_LOTERIA:   number;
+  CANT_PREMIOS_RASPE:     number;
+  TOTAL_PREMIOS_COBRADOS: string;
+  Client:                 Laft;
+}
+
+export interface Laft {
+  TIPODOCUMENTO: string;
+  NOMBRES:       string;
+  DIRECCION:     string;
+  TELEFONO1:     string;
+  PEP:           string;
+}
