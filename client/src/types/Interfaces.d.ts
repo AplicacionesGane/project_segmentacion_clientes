@@ -115,3 +115,15 @@ export interface Laft {
   TELEFONO1:     string;
   PEP:           string;
 }
+
+export interface ReportOracle {
+  FECHAPAGO: string
+  SERIE: string
+  PREMIO: number
+  VENDEDOR: number
+  NOMBRES: string
+  HORA: string
+  PUNTO_VTA_PAGO: number
+  APLICACION: string
+  MUNICIPIO: string
+}
