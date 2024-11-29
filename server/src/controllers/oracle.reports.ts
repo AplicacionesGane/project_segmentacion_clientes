@@ -26,6 +26,11 @@ export const getReportOracle = async (req: Request, res: Response) => {
     res.status(400).json('Fechas y zona son requeridas');
   }
 
+  console.log(zona);
+
+  const fecha1Reverse = fecha1.split('-').reverse().join('/');
+  const fecha2Reverse = fecha2.split('-').reverse().join('/');
+
   let connection: Connection | undefined;
   const pool = await connectionOracle();
 
@@ -49,16 +54,16 @@ export const getReportOracle = async (req: Request, res: Response) => {
       FROM(
         SELECT FECHAPAGO, SERIE||NUMERO SERIE, TOTALPREMIO-RETEFUENTE PREMIO, SUBSTR(LOGINCAJERO,4) VENDEDOR, HORA, PUNTO_VTA_PAGO, 1 APLICACION
         FROM premiospersonaproveedor
-        WHERE ${FunBetweenDates(fecha1, fecha2)}
+        WHERE ${FunBetweenDates(fecha1Reverse, fecha2Reverse)}
         AND documentocajero IN (${strUsers})
       UNION ALL
         SELECT FECHAPAGO, SERIE||NUMERO, TOTALPREMIO-RETEFUENTE PREMIO, SUBSTR(LOGINCAJERO,4) VENDEDOR, HORA, PUNTO_VTA_PAGO, 2 APLICACION
         FROM premiospersonaproveedor@CONSULTAS 
-        WHERE ${FunBetweenDates(fecha1, fecha2)}
+        WHERE ${FunBetweenDates(fecha1Reverse, fecha2Reverse)}
         AND documentocajero in (${strUsers})
         AND serie||numero NOT IN (
           SELECT distinct SERIE||NUMERO FROM premiospersonaproveedor 
-          WHERE ${FunBetweenDates(fecha1, fecha2)}
+          WHERE ${FunBetweenDates(fecha1Reverse, fecha2Reverse)}
           AND documentocajero IN (${strUsers})
           )
         )

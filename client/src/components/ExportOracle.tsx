@@ -19,15 +19,15 @@ const generateExcelData = (datos: ReportOracleInterface[]): unknown[] => {
   ]
 
   const rows = datos.map((it) => ({
-    A: it.FECHAPAGO,
-    B: it.SERIE,
-    C: it.PREMIO,
-    D: it.VENDEDOR,
-    E: it.NOMBRES,
-    F: it.HORA,
-    G: it.PUNTO_VTA_PAGO,
-    H: it.APLICACION,
-    I: it.MUNICIPIO
+    A: it.fechapago,
+    B: it.serie,
+    C: it.premio,
+    D: it.vendedor,
+    E: it.nombres,
+    F: it.hora,
+    G: it.punto_vta_pago,
+    H: it.aplicacion,
+    I: it.municipio
   }))
 
   return [...titulo, ...headers, ...rows]

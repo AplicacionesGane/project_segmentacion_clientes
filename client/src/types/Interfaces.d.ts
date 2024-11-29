@@ -117,13 +117,13 @@ export interface Laft {
 }
 
 export interface ReportOracleInterface {
-  FECHAPAGO: string
-  SERIE: string
-  PREMIO: number
-  VENDEDOR: number
-  NOMBRES: string
-  HORA: string
-  PUNTO_VTA_PAGO: number
-  APLICACION: string
-  MUNICIPIO: string
+  fechapago: string
+  serie: string
+  premio: number
+  vendedor: number
+  nombres: string
+  hora: string
+  punto_vta_pago: number
+  aplicacion: string
+  municipio: string
 }

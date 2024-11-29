@@ -113,15 +113,15 @@ export default function ReportOracle() {
             {
               data.map((item, index) => (
                 <TableRow key={index}>
-                  <TableCell>{item.FECHAPAGO}</TableCell>
-                  <TableCell>{item.SERIE}</TableCell>
-                  <TableCell>{item.PREMIO}</TableCell>
-                  <TableCell>{item.VENDEDOR}</TableCell>
-                  <TableCell>{item.NOMBRES}</TableCell>
-                  <TableCell>{item.HORA}</TableCell>
-                  <TableCell>{item.PUNTO_VTA_PAGO}</TableCell>
-                  <TableCell>{item.APLICACION}</TableCell>
-                  <TableCell>{item.MUNICIPIO}</TableCell>
+                  <TableCell>{item.fechapago}</TableCell>
+                  <TableCell>{item.serie}</TableCell>
+                  <TableCell>{item.premio}</TableCell>
+                  <TableCell>{item.vendedor}</TableCell>
+                  <TableCell>{item.nombres}</TableCell>
+                  <TableCell>{item.hora}</TableCell>
+                  <TableCell>{item.punto_vta_pago}</TableCell>
+                  <TableCell>{item.aplicacion}</TableCell>
+                  <TableCell>{item.municipio}</TableCell>
                 </TableRow>
               ))
             }
