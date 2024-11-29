@@ -68,6 +68,18 @@ export default function SeleccionReportes() {
         </div>
       </article>
 
+      <article className='flex flex-col justify-around bg-gradient-to-r from-red-900 to-red-500 p-4 rounded-md shadow-xl space-y-2'>
+        <h1 className='font-semibold text-2xl text-white'>Reporte Premios Pagados en PDV (CP2) Oracle</h1>
+        <p className='text-white text-balance'>
+          Genera la información de los premios pagados en PDV (CP2) Oracle. Se debe seleccionar rango de fechas para la consulta y empresa
+        </p>
+        <div className='flex items-center justify-between'>
+          <RiArchiveStackFill   size={48} color='white' />
+          <button onClick={() => navigate('/ReporteLAFT')}
+            className='bg-yellow-300 hover:bg-yellow-400 p-2 rounded-md font-semibold'>Ingresar</button>
+        </div>
+      </article>
+
     </section>
   );
 }
