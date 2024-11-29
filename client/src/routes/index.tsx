@@ -12,6 +12,7 @@ const Dashboard = lazy(() => import('../pages/Dashboard'));
 const ReportCobrados = lazy(() => import('../pages/ReportCobrados'));
 const ReportMayores = lazy(() => import('../pages/ReportMayores'));
 const ReportLaft = lazy(() => import('../pages/ReportLaft'));
+const ResportOracle = lazy(() => import('../pages/ReporteOracle'));
 
 
 export const BrowserRouter = createBrowserRouter([
@@ -58,6 +59,10 @@ export const BrowserRouter = createBrowserRouter([
       {
         path: 'reporteLAFT',
         element: <Suspense fallback={<div>Loading...</div>}><ReportLaft /></Suspense>
+      },
+      {
+        path: 'reportOracle',
+        element: <Suspense fallback={<div>Loading...</div>}><ResportOracle /></Suspense>
       }
     ]
   }

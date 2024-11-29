@@ -107,7 +107,6 @@ export const getReportMayores = async (req: Request, res: Response) => {
   }
 };
 
-
 const EvaluarTipLAFT = (tipo: string) => literal(`CASE WHEN TIPOPREMIO IN ('${tipo}') THEN 1 ELSE 0 END`);
 const EvaluarTipLAFT2 = (tipo: string) => literal(`CASE WHEN TIPOJUEGO IN ('${tipo}') THEN 1 ELSE 0 END`);
 
@@ -155,5 +154,3 @@ export const getReportLAFT = async (req: Request, res: Response) => {
     res.status(500).json('Internal server error');
   }
 };
-
-
