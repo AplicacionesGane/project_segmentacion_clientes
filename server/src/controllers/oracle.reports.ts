@@ -16,6 +16,7 @@ export type RowType = [
 
 const FunBetweenDates = (startDate: string, endDate: string) => `fechapago BETWEEN TO_DATE('${startDate}', 'DD/MM/YYYY') AND TO_DATE('${endDate}', 'DD/MM/YYYY')`;
 const aplanarString = (arr: number[]) => arr.map((el) => `'${el}'`).join(',');
+const municipio = (zona: '39627' | '39628') => zona === '39627' ? `39629, 39630, 39631` : `39632`;	
 
 export const getReportOracle = async (req: Request, res: Response) => {
   const data = req.body;
@@ -25,9 +26,7 @@ export const getReportOracle = async (req: Request, res: Response) => {
   if (!fecha1 || !fecha2 || !zona) {
     res.status(400).json('Fechas y zona son requeridas');
   }
-
-  console.log(zona);
-
+  
   const fecha1Reverse = fecha1.split('-').reverse().join('/');
   const fecha2Reverse = fecha2.split('-').reverse().join('/');
 
@@ -70,7 +69,7 @@ export const getReportOracle = async (req: Request, res: Response) => {
       TT, PERSONAS PE, UBICACIONNEGOCIOS UN
       WHERE PE.DOCUMENTO=TT.VENDEDOR
       AND UN.TRTRIO_CODIGO=TT.PUNTO_VTA_PAGO
-      AND UN.TRTRIO_CODIGO_COMPUESTO_DE IN (39629,39630,39631) 
+      AND UN.TRTRIO_CODIGO_COMPUESTO_DE IN (${municipio(zona)}) 
       ORDER BY TT.FECHAPAGO,TT.APLICACION
       `
     );

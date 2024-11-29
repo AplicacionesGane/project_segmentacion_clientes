@@ -1,4 +1,4 @@
-import { RiArchiveStackFill, RiArticleFill, RiGroupLine, RiGuideFill } from "@remixicon/react";
+import { RiArchiveStackFill, RiArticleFill, RiGroupLine, RiGuideFill, RiDatabaseLine } from "@remixicon/react";
 import { useNavigate } from "react-router-dom";
 
 export default function SeleccionReportes() {
@@ -50,31 +50,31 @@ export default function SeleccionReportes() {
           Genera la información de los premios mayores 15UVT. Se debe seleccionar rango de fechas para la consulta.
         </p>
         <div className='flex items-center justify-between'>
-          <RiArticleFill  size={48} color='white' />
+          <RiArticleFill size={48} color='white' />
           <button onClick={() => navigate('/reportPremiosMayores')}
             className='bg-yellow-300 hover:bg-yellow-400 p-2 rounded-md font-semibold'>Ingresar</button>
         </div>
       </article>
-      
+
       <article className='flex flex-col justify-around bg-gradient-to-r from-orange-900 to-orange-500 p-4 rounded-md shadow-xl space-y-2'>
         <h1 className='font-semibold text-2xl text-white'>Reporte LAFT-FPADM</h1>
         <p className='text-white text-balance'>
           Genera la información de LAFT-FPADM. Se debe seleccionar rango de fechas para la consulta.
         </p>
         <div className='flex items-center justify-between'>
-          <RiArchiveStackFill   size={48} color='white' />
+          <RiArchiveStackFill size={48} color='white' />
           <button onClick={() => navigate('/ReporteLAFT')}
             className='bg-yellow-300 hover:bg-yellow-400 p-2 rounded-md font-semibold'>Ingresar</button>
         </div>
       </article>
 
-      <article className='flex flex-col justify-around bg-gradient-to-r from-red-900 to-red-500 p-4 rounded-md shadow-xl space-y-2'>
+      <article className='flex flex-col justify-around bg-gradient-to-r from-violet-900 to-violet-600 p-4 rounded-md shadow-xl space-y-2'>
         <h1 className='font-semibold text-2xl text-white'>Reporte Premios Pagados en PDV (CP2) Oracle</h1>
         <p className='text-white text-balance'>
           Genera la información de los premios pagados en PDV (CP2) Oracle. Se debe seleccionar rango de fechas para la consulta y empresa
         </p>
         <div className='flex items-center justify-between'>
-          <RiArchiveStackFill   size={48} color='white' />
+          <RiDatabaseLine size={48} color='white' />
           <button onClick={() => navigate('/reportOracle')}
             className='bg-yellow-300 hover:bg-yellow-400 p-2 rounded-md font-semibold'>Ingresar</button>
         </div>
