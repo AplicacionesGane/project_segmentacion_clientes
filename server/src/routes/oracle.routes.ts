@@ -3,4 +3,4 @@ import { Router } from 'express'
 
 export const oracleRouter = Router();
 
-oracleRouter.get('/report', getReportOracle);
+oracleRouter.post('/report', getReportOracle);

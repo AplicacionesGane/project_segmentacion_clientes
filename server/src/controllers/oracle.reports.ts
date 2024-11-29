@@ -18,14 +18,14 @@ const FunBetweenDates = (startDate: string, endDate: string) => `fechapago BETWE
 const aplanarString = (arr: number[]) => arr.map((el) => `'${el}'`).join(',');
 
 export const getReportOracle = async (req: Request, res: Response) => {
-  /*const data = req.body;
+  const data = req.body;
 
   const { fecha1, fecha2, zona } = data;
 
   if (!fecha1 || !fecha2 || !zona) {
     res.status(400).json('Fechas y zona son requeridas');
   }
-*/
+
   let connection: Connection | undefined;
   const pool = await connectionOracle();
 
@@ -49,16 +49,16 @@ export const getReportOracle = async (req: Request, res: Response) => {
       FROM(
         SELECT FECHAPAGO, SERIE||NUMERO SERIE, TOTALPREMIO-RETEFUENTE PREMIO, SUBSTR(LOGINCAJERO,4) VENDEDOR, HORA, PUNTO_VTA_PAGO, 1 APLICACION
         FROM premiospersonaproveedor
-        WHERE ${FunBetweenDates('01/10/2024', '31/10/2024')}
+        WHERE ${FunBetweenDates(fecha1, fecha2)}
         AND documentocajero IN (${strUsers})
       UNION ALL
         SELECT FECHAPAGO, SERIE||NUMERO, TOTALPREMIO-RETEFUENTE PREMIO, SUBSTR(LOGINCAJERO,4) VENDEDOR, HORA, PUNTO_VTA_PAGO, 2 APLICACION
         FROM premiospersonaproveedor@CONSULTAS 
-        WHERE ${FunBetweenDates('01/10/2024', '31/10/2024')}
+        WHERE ${FunBetweenDates(fecha1, fecha2)}
         AND documentocajero in (${strUsers})
         AND serie||numero NOT IN (
           SELECT distinct SERIE||NUMERO FROM premiospersonaproveedor 
-          WHERE ${FunBetweenDates('01/10/2024', '31/10/2024')}
+          WHERE ${FunBetweenDates(fecha1, fecha2)}
           AND documentocajero IN (${strUsers})
           )
         )
@@ -77,6 +77,7 @@ export const getReportOracle = async (req: Request, res: Response) => {
       }, {} as Record<string | number, any>);
     });
 
+    console.log(data?.length);
 
     res.status(200).json(data);
   } catch (error) {
