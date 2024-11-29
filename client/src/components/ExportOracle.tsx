@@ -49,7 +49,7 @@ const createExcelFile = (data: unknown[]): void => {
   writeFile(libro, 'ReporteOracle.xlsx')
 }
 
-export const BottonExporBaloto = ({ datos }: { datos: ReportOracleInterface[] }): JSX.Element => {
+export const BottonExporOracleReport = ({ datos }: { datos: ReportOracleInterface[] }): JSX.Element => {
   const handleDownload = (): void => {
     const dataFinal = generateExcelData(datos)
 

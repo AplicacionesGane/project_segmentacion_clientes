@@ -116,7 +116,7 @@ export interface Laft {
   PEP:           string;
 }
 
-export interface ReportOracle {
+export interface ReportOracleInterface {
   FECHAPAGO: string
   SERIE: string
   PREMIO: number

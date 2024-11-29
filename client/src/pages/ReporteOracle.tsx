@@ -1,11 +1,10 @@
 import { Table, TableHead, TableBody, TableCell, TableHeaderCell, TableRow } from '../components/Table';
 import { CalendarLocaleExample } from '../components/ui/SelectDate';
-import { BottonExporBaloto } from '../components/ExportBaloto';
-import { ReportDataBaloto } from '../types/Interfaces';
+import { BottonExporOracleReport } from '../components/ExportOracle';
+import { ReportOracleInterface } from '../types/Interfaces';
 import { URL_API_DATA } from '../utils/contanst';
 import { FormEvent, useState } from 'react';
 import axios from 'axios';
-
 
 export default function ReportOracle() {
   const [date1, setDate1] = useState<Date | undefined>(undefined)
@@ -15,7 +14,7 @@ export default function ReportOracle() {
   const [visible, setVisible] = useState(false);
   const [visible2, setVisible2] = useState(false);
 
-  const [data, setData] = useState<ReportDataBaloto[]>([]);
+  const [data, setData] = useState<ReportOracleInterface[]>([]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -25,7 +24,7 @@ export default function ReportOracle() {
       return;
     }
 
-    axios.post(`${URL_API_DATA}/reportBaloto`, { fecha1: date1.toISOString().slice(0, 10), fecha2: date2.toISOString().slice(0, 10), zona })
+    axios.post(`${URL_API_DATA}/oracle/report`, { fecha1: date1.toISOString().slice(0, 10), fecha2: date2.toISOString().slice(0, 10), zona })
       .then(res => {
         console.log(res.data);
         setData(res.data);
@@ -80,7 +79,7 @@ export default function ReportOracle() {
 
         <div>
           {
-            data.length > 0 ? <BottonExporBaloto datos={data} /> : null
+            data.length > 0 ? <BottonExporOracleReport datos={data} /> : null
           }
         </div>
       </div>
@@ -99,28 +98,30 @@ export default function ReportOracle() {
         <Table>
           <TableHead className='bg-blue-100'>
             <TableRow>
-              <TableHeaderCell>Serie consecutivo</TableHeaderCell>
-              <TableHeaderCell>Tipo Premio</TableHeaderCell>
+              <TableHeaderCell>FECHA PAGO</TableHeaderCell>
+              <TableHeaderCell>SERIE</TableHeaderCell>
               <TableHeaderCell>Valor Premio</TableHeaderCell>
-              <TableHeaderCell>Retefuente</TableHeaderCell>
-              <TableHeaderCell>Cajero</TableHeaderCell>
-              <TableHeaderCell>Fecha Pago</TableHeaderCell>
-              <TableHeaderCell>Tercero</TableHeaderCell>
-              <TableHeaderCell>Empresa</TableHeaderCell>
+              <TableHeaderCell>VENDEDOR</TableHeaderCell>
+              <TableHeaderCell>NOMBRES</TableHeaderCell>
+              <TableHeaderCell>HORA</TableHeaderCell>
+              <TableHeaderCell>PUNTO_VTA_PAGO</TableHeaderCell>
+              <TableHeaderCell>APLICACION</TableHeaderCell>
+              <TableHeaderCell>MUNICIPIO</TableHeaderCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {
               data.map((item, index) => (
                 <TableRow key={index}>
-                  <TableCell>{item.SERIE_CONSECUTIVO}</TableCell>
-                  <TableCell>{item.TIPOPREMIO}</TableCell>
-                  <TableCell>{item.PREMIO}</TableCell>
-                  <TableCell>{item.RETEFUENTE}</TableCell>
-                  <TableCell>{item.CAJERO}</TableCell>
                   <TableCell>{item.FECHAPAGO}</TableCell>
-                  <TableCell>{item.TERCERO}</TableCell>
-                  <TableCell>{item.ZONA === '39627' ? 'Multired' : 'Servired'}</TableCell>
+                  <TableCell>{item.SERIE}</TableCell>
+                  <TableCell>{item.PREMIO}</TableCell>
+                  <TableCell>{item.VENDEDOR}</TableCell>
+                  <TableCell>{item.NOMBRES}</TableCell>
+                  <TableCell>{item.HORA}</TableCell>
+                  <TableCell>{item.PUNTO_VTA_PAGO}</TableCell>
+                  <TableCell>{item.APLICACION}</TableCell>
+                  <TableCell>{item.MUNICIPIO}</TableCell>
                 </TableRow>
               ))
             }

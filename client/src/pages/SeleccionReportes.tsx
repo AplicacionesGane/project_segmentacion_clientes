@@ -75,7 +75,7 @@ export default function SeleccionReportes() {
         </p>
         <div className='flex items-center justify-between'>
           <RiArchiveStackFill   size={48} color='white' />
-          <button onClick={() => navigate('/ReporteLAFT')}
+          <button onClick={() => navigate('/reportOracle')}
             className='bg-yellow-300 hover:bg-yellow-400 p-2 rounded-md font-semibold'>Ingresar</button>
         </div>
       </article>
