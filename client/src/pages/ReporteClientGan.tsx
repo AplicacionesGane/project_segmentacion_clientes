@@ -1,6 +1,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from '../components/Table';
 import { BottonExporClientGanador } from '../components/ExportClientGanador';
 import { FormEvent, useEffect, useState } from 'react';
+import Loading from '../components/ui/LoadingComp';
 import { DataCliente } from '../types/Interfaces';
 import { URL_API_DATA } from '../utils/contanst';
 import { Label } from '../components/Label';
@@ -11,6 +12,8 @@ export default function ReportClienteGanadores() {
   const [date2, setDate2] = useState<string>('')
   const [zona, setZona] = useState<string | undefined>(undefined)
   const [filter, setFilter] = useState<string>('')
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [data, setData] = useState<DataCliente[]>([]);
 
@@ -24,13 +27,16 @@ export default function ReportClienteGanadores() {
       return;
     }
 
+    setLoading(true);
+
     axios.post(`${URL_API_DATA}/reporClientGanadores`, { fecha1: date1.slice(0, 10), fecha2: date2.slice(0, 10), zona })
       .then(res => {
         setData(res.data);
+        setLoading(false);
       })
       .catch(err => {
         console.log(err);
-      })
+      }).finally(() => setLoading(false))
   }
 
   useEffect(() => {
@@ -122,6 +128,10 @@ export default function ReportClienteGanadores() {
           )
         }
       </div>
+
+      {
+        loading ? <Loading /> : null
+      }
     </section>
   )
 }
