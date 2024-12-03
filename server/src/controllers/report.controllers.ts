@@ -141,7 +141,6 @@ export const getReportLAFT = async (req: Request, res: Response) => {
       include: [{
         attributes: ['TIPODOCUMENTO', 'NOMBRES', 'DIRECCION', 'TELEFONO1', 'PEP'],
         model: Client,
-        where: { CATEGORIA: { [Op.in]: ['TR', 'CC', 'CI'] } },
         required: true,
       }],
       group: ['TIPODOCUMENTO', 'TERCERO', 'NOMBRES', 'TELEFONO1', 'DIRECCION','PEP'],
