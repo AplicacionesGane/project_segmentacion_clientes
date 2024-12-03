@@ -1,9 +1,9 @@
 import { Table, TableHead, TableBody, TableCell, TableHeaderCell, TableRow } from '../components/Table';
+import { BottonExporMayores } from '../components/ExportarMayores';
+import { FormEvent, useMemo, useState } from 'react';
 import { ReportMayores } from '../types/Interfaces';
 import { URL_API_DATA } from '../utils/contanst';
-import { FormEvent, useMemo, useState } from 'react';
 import axios from 'axios';
-import { BottonExporMayores } from '../components/ExportarMayores';
 
 
 export default function ReportesPage() {

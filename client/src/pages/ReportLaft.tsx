@@ -1,10 +1,9 @@
 import { Table, TableHead, TableBody, TableCell, TableHeaderCell, TableRow } from '../components/Table';
+import { BottonExporLaft } from '../components/ExportLaft';
+import { FormEvent, useMemo, useState } from 'react';
 import { ReportLaft } from '../types/Interfaces';
 import { URL_API_DATA } from '../utils/contanst';
-import { FormEvent, useMemo, useState } from 'react';
 import axios from 'axios';
-import { BottonExporLaft } from '../components/ExportLaft';
-
 
 export default function ReportesPage() {
   const [date1, setDate1] = useState(' ')

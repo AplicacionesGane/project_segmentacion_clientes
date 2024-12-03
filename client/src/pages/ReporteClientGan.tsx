@@ -1,9 +1,9 @@
 import { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from '../components/Table';
 import { BottonExporClientGanador } from '../components/ExportClientGanador';
 import { CalendarLocaleExample } from '../components/ui/SelectDate';
-import { URL_API_DATA } from '../utils/contanst';
-import { DataCliente } from '../types/Interfaces';
 import { FormEvent, useEffect, useState } from 'react';
+import { DataCliente } from '../types/Interfaces';
+import { URL_API_DATA } from '../utils/contanst';
 import axios from 'axios';
 
 export default function ReportClienteGanadores() {

@@ -6,7 +6,6 @@ import { URL_API_DATA } from '../utils/contanst';
 import { FormEvent, useState } from 'react';
 import axios from 'axios';
 
-
 export default function ReportesPage() {
   const [date1, setDate1] = useState<Date | undefined>(undefined)
   const [date2, setDate2] = useState<Date | undefined>(undefined)
