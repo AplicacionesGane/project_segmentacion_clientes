@@ -1,19 +1,16 @@
 import { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from '../components/Table';
 import { BottonExporClientGanador } from '../components/ExportClientGanador';
-import { CalendarLocaleExample } from '../components/ui/SelectDate';
 import { FormEvent, useEffect, useState } from 'react';
 import { DataCliente } from '../types/Interfaces';
 import { URL_API_DATA } from '../utils/contanst';
 import axios from 'axios';
+import { Label } from '../components/Label';
 
 export default function ReportClienteGanadores() {
-  const [date1, setDate1] = useState<Date | undefined>(undefined)
-  const [date2, setDate2] = useState<Date | undefined>(undefined)
+  const [date1, setDate1] = useState<string>('')
+  const [date2, setDate2] = useState<string>('')
   const [zona, setZona] = useState<string | undefined>(undefined)
   const [filter, setFilter] = useState<string>('')
-
-  const [visible, setVisible] = useState(false);
-  const [visible2, setVisible2] = useState(false);
 
   const [data, setData] = useState<DataCliente[]>([]);
 
@@ -27,7 +24,7 @@ export default function ReportClienteGanadores() {
       return;
     }
 
-    axios.post(`${URL_API_DATA}/reporClientGanadores`, { fecha1: date1.toISOString().slice(0, 10), fecha2: date2.toISOString().slice(0, 10), zona })
+    axios.post(`${URL_API_DATA}/reporClientGanadores`, { fecha1: date1.slice(0, 10), fecha2: date2.slice(0, 10), zona })
       .then(res => {
         setData(res.data);
       })
@@ -47,24 +44,15 @@ export default function ReportClienteGanadores() {
   return (
     <section>
       <div className='w-full flex gap-4 px-2 pt-1 items-center border-b pb-2'>
-        <button onClick={() => setVisible(!visible)}
-          className={`${visible ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600'} text-white p-2 rounded-md w-40`} >
-          {visible ? 'Ocultar' : 'Fecha Inicial'}
-        </button>
+        <div>
+            <Label className='font-semibold'>Fecha Inicial: </Label>
+            <input type='date' className='p-2 rounded-md' value={date1} onChange={ev => setDate1(ev.target.value)}/> 
+          </div>
 
-
-        <article className='w-52'>
-          <span className='font-semibold text-xs'>Fecha Inicial:</span> {date1?.toISOString().slice(0, 10) || ' '}
-        </article>
-
-        <button onClick={() => setVisible2(!visible2)}
-          className={`${visible2 ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600'} text-white p-2 rounded-md w-40`} >
-          {visible2 ? 'Ocultar' : 'Fecha Final'}
-        </button>
-
-        <article className='w-52'>
-          <span className='font-semibold text-xs'>Fecha Final:</span> {date2?.toISOString().slice(0, 10) || ' '}
-        </article>
+          <div>
+            <Label className='font-semibold'>Fecha Final: </Label>
+            <input type='date' className='p-2 rounded-md' value={date2} onChange={ev => setDate2(ev.target.value)}/>
+          </div>
 
         <form onSubmit={handleSubmit} className='gap-2 flex'>
           <select name='zona' className='px-4 rounded-md w-52' value={zona} onChange={e => setZona(e.target.value)}>
@@ -100,14 +88,6 @@ export default function ReportClienteGanadores() {
           }
         </div>
 
-      </div>
-
-      <div className='absolute z-20 top-12 left-2'>
-        {visible && (<CalendarLocaleExample key={'fechaInitial'} value={date1} onChange={setDate1} />)}
-      </div>
-
-      <div className='absolute z-20 top-12 left-96'>
-        {visible2 && (<CalendarLocaleExample key={'fechaFinal'} value={date2} onChange={setDate2} />)}
       </div>
 
       <div className='h-[92vh] overflow-y-auto'>
