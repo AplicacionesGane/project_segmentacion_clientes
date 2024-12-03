@@ -7,7 +7,7 @@ const SeleccionReportes = lazy(() => import('../pages/SeleccionReportes'));
 const ReportClienteGanadores = lazy(() => import('../pages/ReporteClientGan'));
 const ClienteTodosPage = lazy(() => import('../pages/ClientesTodos'));
 const EditarClientePage = lazy(() => import('../pages/EditarCliente'));
-const ReportesPage = lazy(() => import('../pages/ReportesPage'));
+const ReporteBaloto = lazy(() => import('../pages/ReporteBaloto'));
 const Dashboard = lazy(() => import('../pages/Dashboard'));
 const ReportCobrados = lazy(() => import('../pages/ReportCobrados'));
 const ReportMayores = lazy(() => import('../pages/ReportMayores'));
@@ -42,7 +42,7 @@ export const BrowserRouter = createBrowserRouter([
       },
       {
         path: 'reportBaloto',
-        element: <Suspense fallback={<div>Loading...</div>}><ReportesPage /></Suspense>
+        element: <Suspense fallback={<div>Loading...</div>}><ReporteBaloto /></Suspense>
       },
       {
         path: 'reportClientGanadores',
