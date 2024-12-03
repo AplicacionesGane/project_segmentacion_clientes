@@ -1,6 +1,7 @@
 import { Table, TableHead, TableBody, TableCell, TableHeaderCell, TableRow } from '../components/Table';
 import { BottonExporBaloto } from '../components/ExportBaloto';
 import { ReportDataBaloto } from '../types/Interfaces';
+import Loading from '../components/ui/LoadingComp';
 import { URL_API_DATA } from '../utils/contanst';
 import { FormEvent, useState } from 'react';
 import { Label } from '../components/Label';
@@ -10,6 +11,8 @@ export default function ReporteBaloto() {
   const [date1, setDate1] = useState<string>()
   const [date2, setDate2] = useState<string>()
   const [zona, setZona] = useState<string | undefined>(undefined)
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [data, setData] = useState<ReportDataBaloto[]>([]);
 
@@ -21,6 +24,8 @@ export default function ReporteBaloto() {
       return;
     }
 
+    setLoading(true);
+
     axios.post(`${URL_API_DATA}/reportBaloto`, { fecha1: date1.slice(0, 10), fecha2: date2.slice(0, 10), zona })
       .then(res => {
         console.log(res.data);
@@ -29,6 +34,7 @@ export default function ReporteBaloto() {
       .catch(err => {
         console.log(err);
       })
+      .finally(() => setLoading(false));
   }
 
   return (
@@ -100,6 +106,8 @@ export default function ReporteBaloto() {
           </TableBody>
         </Table>
       </div>
+
+      {loading && <Loading />}
 
     </section>
   )
