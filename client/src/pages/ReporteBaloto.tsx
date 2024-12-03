@@ -1,18 +1,15 @@
 import { Table, TableHead, TableBody, TableCell, TableHeaderCell, TableRow } from '../components/Table';
-import { CalendarLocaleExample } from '../components/ui/SelectDate';
 import { BottonExporBaloto } from '../components/ExportBaloto';
 import { ReportDataBaloto } from '../types/Interfaces';
 import { URL_API_DATA } from '../utils/contanst';
 import { FormEvent, useState } from 'react';
+import { Label } from '../components/Label';
 import axios from 'axios';
 
 export default function ReporteBaloto() {
-  const [date1, setDate1] = useState<Date | undefined>(undefined)
-  const [date2, setDate2] = useState<Date | undefined>(undefined)
+  const [date1, setDate1] = useState<string>()
+  const [date2, setDate2] = useState<string>()
   const [zona, setZona] = useState<string | undefined>(undefined)
-
-  const [visible, setVisible] = useState(false);
-  const [visible2, setVisible2] = useState(false);
 
   const [data, setData] = useState<ReportDataBaloto[]>([]);
 
@@ -24,7 +21,7 @@ export default function ReporteBaloto() {
       return;
     }
 
-    axios.post(`${URL_API_DATA}/reportBaloto`, { fecha1: date1.toISOString().slice(0, 10), fecha2: date2.toISOString().slice(0, 10), zona })
+    axios.post(`${URL_API_DATA}/reportBaloto`, { fecha1: date1.slice(0, 10), fecha2: date2.slice(0, 10), zona })
       .then(res => {
         console.log(res.data);
         setData(res.data);
@@ -37,25 +34,16 @@ export default function ReporteBaloto() {
   return (
     <section className='relative flex flex-col'>
 
-      <div className='w-full flex gap-4 px-2 pt-1 items-center border-b pb-2'>
-        <button onClick={() => setVisible(!visible)}
-          className={`${visible ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600'} text-white p-2 rounded-md w-40`} >
-          {visible ? 'Ocultar' : 'Fecha Inicial'}
-        </button>
+      <div className='flex items-center justify-around py-2 px-4'>
+        <div>
+          <Label className='font-semibold'>Fecha Inicial: </Label>
+          <input type='date' className='p-2 rounded-md' value={date1} onChange={ev => setDate1(ev.target.value)}/> 
+        </div>
 
-
-        <article className='w-56'>
-          <span className='font-semibold'>Fecha Inicial:</span> {date1?.toISOString().slice(0, 10) || ' '}
-        </article>
-
-        <button onClick={() => setVisible2(!visible2)}
-          className={`${visible2 ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600'} text-white p-2 rounded-md w-40`} >
-          {visible2 ? 'Ocultar' : 'Fecha Final'}
-        </button>
-
-        <article className='w-56'>
-          <span className='font-semibold'>Fecha Final:</span> {date2?.toISOString().slice(0, 10) || ' '}
-        </article>
+        <div>
+          <Label className='font-semibold'>Fecha Final: </Label>
+          <input type='date' className='p-2 rounded-md' value={date2} onChange={ev => setDate2(ev.target.value)}/>
+        </div>
 
         <form onSubmit={handleSubmit} className='gap-2 flex'>
           <select name='zona' className='px-4 rounded-md w-52' value={zona} onChange={e => setZona(e.target.value)}>
@@ -77,22 +65,8 @@ export default function ReporteBaloto() {
 
         </div>
 
-        <div>
-          {
-            data.length > 0 ? <BottonExporBaloto datos={data} /> : null
-          }
-        </div>
+        <div>{data.length > 0 ? <BottonExporBaloto datos={data} /> : null} </div>
       </div>
-
-
-      <div className='absolute z-20 top-12 left-2'>
-        {visible && (<CalendarLocaleExample key={'fechaInitial'} value={date1} onChange={setDate1} />)}
-      </div>
-
-      <div className='absolute z-20 top-12 left-96'>
-        {visible2 && (<CalendarLocaleExample key={'fechaFinal'} value={date2} onChange={setDate2} />)}
-      </div>
-
 
       <div className='h-[92vh] overflow-y-auto'>
         <Table>
