@@ -1,6 +1,7 @@
 import { Table, TableHead, TableBody, TableCell, TableHeaderCell, TableRow } from '../components/Table';
 import { BottonExporLaft } from '../components/ExportLaft';
 import { FormEvent, useMemo, useState } from 'react';
+import Loading from '../components/ui/LoadingComp';
 import { ReportLaft } from '../types/Interfaces';
 import { URL_API_DATA } from '../utils/contanst';
 import axios from 'axios';
@@ -10,6 +11,8 @@ export default function ReportesPage() {
   const [date2, setDate2] = useState(' ')
   const [zona, setZona] = useState<string | undefined>(undefined)
   const [filter, setFilter] = useState<string>('')
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [data, setData] = useState<ReportLaft[]>([]);
 
@@ -21,14 +24,17 @@ export default function ReportesPage() {
       return;
     }
 
+    setLoading(true);
+
     axios.post(`${URL_API_DATA}/reporlaft`, { fecha1: date1.toString().slice(0, 10), fecha2: date2.toString().slice(0, 10), zona })
       .then(res => {
         console.log(res.data);
         setData(res.data);
+        setLoading(false);
       })
       .catch(err => {
         console.log(err);
-      })
+      }).finally(() => setLoading(false))
   }
 
   const filteredData = useMemo(() => {
@@ -124,6 +130,10 @@ export default function ReportesPage() {
           </TableBody>
         </Table>
       </div>
+
+      {
+        loading ? <Loading /> : null
+      }
 
     </section>
   )
