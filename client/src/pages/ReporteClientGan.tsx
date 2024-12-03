@@ -3,8 +3,8 @@ import { BottonExporClientGanador } from '../components/ExportClientGanador';
 import { FormEvent, useEffect, useState } from 'react';
 import { DataCliente } from '../types/Interfaces';
 import { URL_API_DATA } from '../utils/contanst';
-import axios from 'axios';
 import { Label } from '../components/Label';
+import axios from 'axios';
 
 export default function ReportClienteGanadores() {
   const [date1, setDate1] = useState<string>('')
@@ -45,14 +45,14 @@ export default function ReportClienteGanadores() {
     <section>
       <div className='w-full flex gap-4 px-2 pt-1 items-center border-b pb-2'>
         <div>
-            <Label className='font-semibold'>Fecha Inicial: </Label>
-            <input type='date' className='p-2 rounded-md' value={date1} onChange={ev => setDate1(ev.target.value)}/> 
-          </div>
+          <Label className='font-semibold'>Fecha Inicial: </Label>
+          <input type='date' className='p-2 rounded-md' value={date1} onChange={ev => setDate1(ev.target.value)} />
+        </div>
 
-          <div>
-            <Label className='font-semibold'>Fecha Final: </Label>
-            <input type='date' className='p-2 rounded-md' value={date2} onChange={ev => setDate2(ev.target.value)}/>
-          </div>
+        <div>
+          <Label className='font-semibold'>Fecha Final: </Label>
+          <input type='date' className='p-2 rounded-md' value={date2} onChange={ev => setDate2(ev.target.value)} />
+        </div>
 
         <form onSubmit={handleSubmit} className='gap-2 flex'>
           <select name='zona' className='px-4 rounded-md w-52' value={zona} onChange={e => setZona(e.target.value)}>
