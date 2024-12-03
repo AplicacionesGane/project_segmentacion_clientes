@@ -1,16 +1,18 @@
 import { Table, TableHead, TableBody, TableCell, TableHeaderCell, TableRow } from '../components/Table';
-import { ReportPremios } from '../types/Interfaces';
-import { URL_API_DATA } from '../utils/contanst';
-import { FormEvent, useMemo, useState } from 'react';
-import axios from 'axios';
 import { BottonExporPremios } from '../components/ExportarCobrados';
-
+import { FormEvent, useMemo, useState } from 'react';
+import { ReportPremios } from '../types/Interfaces';
+import Loading from '../components/ui/LoadingComp';
+import { URL_API_DATA } from '../utils/contanst';
+import axios from 'axios';
 
 export default function ReportesPage() {
   const [date1, setDate1] = useState(' ')
   const [date2, setDate2] = useState(' ')
   const [zona, setZona] = useState<string | undefined>(undefined)
   const [filter, setFilter] = useState<string>('')
+
+  const [loading, setLoading] = useState(false);
 
   const [data, setData] = useState<ReportPremios[]>([]);
 
@@ -22,14 +24,17 @@ export default function ReportesPage() {
       return;
     }
 
+    setLoading(true);
+
     axios.post(`${URL_API_DATA}/reporCobrados`, { fecha1: date1.toString().slice(0, 10), fecha2: date2.toString().slice(0, 10), zona })
       .then(res => {
         console.log(res.data);
         setData(res.data);
+        setLoading(false);
       })
       .catch(err => {
         console.log(err);
-      })
+      }).finally(() => setLoading(false));
   }
 
   const filteredData = useMemo(() => {
@@ -126,6 +131,10 @@ export default function ReportesPage() {
           </TableBody>
         </Table>
       </div>
+
+      {
+        loading ? <Loading /> : null
+      }
 
     </section>
   )
