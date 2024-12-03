@@ -1,6 +1,7 @@
 import { Table, TableHead, TableBody, TableCell, TableHeaderCell, TableRow } from '../components/Table';
 import { BottonExporOracleReport } from '../components/ExportOracle';
 import { ReportOracleInterface } from '../types/Interfaces';
+import Loading from '../components/ui/LoadingComp';
 import { URL_API_DATA } from '../utils/contanst';
 import { FormEvent, useState } from 'react';
 import { Label } from '../components/Label';
@@ -10,6 +11,8 @@ export default function ReportOracle() {
   const [date1, setDate1] = useState<string>('')
   const [date2, setDate2] = useState<string>('')
   const [zona, setZona] = useState<string | undefined>(undefined)
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [data, setData] = useState<ReportOracleInterface[]>([]);
 
@@ -21,14 +24,18 @@ export default function ReportOracle() {
       return;
     }
 
+    setLoading(true);
+
     axios.post(`${URL_API_DATA}/oracle/report`, { fecha1: date1.slice(0, 10), fecha2: date2.slice(0, 10), zona })
       .then(res => {
         console.log(res.data);
         setData(res.data);
+        setLoading(false);
       })
       .catch(err => {
         console.log(err);
       })
+      .finally(() => setLoading(false) )
   }
 
   return (
@@ -106,6 +113,10 @@ export default function ReportOracle() {
           </TableBody>
         </Table>
       </div>
+
+      {
+        loading ? <Loading /> : null
+      }
 
     </section>
   )
