@@ -3,8 +3,8 @@ import { Request, Response } from 'express';
 import {col, fn, literal, Op } from 'sequelize';
 import { Client } from '../models/clientes.model';
 
-const EvaluarTipoPremio = (tipo: string) => literal(`CASE WHEN TIPOPREMIO IN ('${tipo}') THEN 1 ELSE 0 END`);
-const EvaluarTipoPremio2 = (tipo: string) => literal(`CASE WHEN TIPOJUEGO IN ('${tipo}') THEN 1 ELSE 0 END`);
+const EvaluarTipoPremio = (tipo: string) => literal(`CASE WHEN TIPOPREMIO IN ('${tipo}') THEN 1 END`);
+const EvaluarTipoPremio2 = (tipo: string) => literal(`CASE WHEN TIPOJUEGO IN ('${tipo}') THEN 1 END`);
 
 export const getReportCobrados = async (req: Request, res: Response) => {
   const data = req.body;
@@ -37,7 +37,6 @@ export const getReportCobrados = async (req: Request, res: Response) => {
         attributes: ['TIPODOCUMENTO', 'NOMBRES', 'CATEGORIA', 'DIRECCION', 'TELEFONO1'],
         model: Client,
         where: { CATEGORIA: { [Op.in]: ['TR', 'CC', 'CI'] } },
-        required: true,
       }],
       group: ['TERCERO']
     });
