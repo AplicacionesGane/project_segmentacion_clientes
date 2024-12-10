@@ -4,7 +4,7 @@ import {col, fn, literal, Op } from 'sequelize';
 import { Client } from '../models/clientes.model';
 
 const EvaluarTipoPremio = (tipo: string) => literal(`CASE WHEN TIPOPREMIO IN ('${tipo}') THEN 1 END`);
-const EvaluarTipoPremio2 = (tipo: string) => literal(`CASE WHEN TIPOJUEGO IN ('${tipo}') THEN 1 END`);
+const EvaluarTipoJuego = (tipo: string) => literal(`CASE WHEN TIPOJUEGO IN ('${tipo}') THEN 1 END`);
 
 export const getReportCobrados = async (req: Request, res: Response) => {
   const data = req.body;
@@ -26,7 +26,7 @@ export const getReportCobrados = async (req: Request, res: Response) => {
         [fn('COUNT', EvaluarTipoPremio('LOCAL')), 'CANT_PREMIOS_CHANCE'],
         [fn('COUNT', EvaluarTipoPremio('ASTRO')), 'CANT_PREMIOS_ASTRO'],
         [fn('COUNT', EvaluarTipoPremio('REMOTO')), 'CANT_PREMIOS_LOTERIA'],
-        [fn('COUNT', EvaluarTipoPremio2('107')), 'CANT_PREMIOS_RASPE'],
+        [fn('COUNT', EvaluarTipoJuego('107')), 'CANT_PREMIOS_RASPE'],
         [fn('SUM', col('PREMIO')), 'TOTAL_PREMIOS_COBRADOS'],
       ],
       where: {
@@ -106,9 +106,6 @@ export const getReportMayores = async (req: Request, res: Response) => {
   }
 };
 
-const EvaluarTipLAFT = (tipo: string) => literal(`CASE WHEN TIPOPREMIO IN ('${tipo}') THEN 1 ELSE 0 END`);
-const EvaluarTipLAFT2 = (tipo: string) => literal(`CASE WHEN TIPOJUEGO IN ('${tipo}') THEN 1 ELSE 0 END`);
-
 export const getReportLAFT = async (req: Request, res: Response) => {
   const data = req.body;
 
@@ -126,10 +123,10 @@ export const getReportLAFT = async (req: Request, res: Response) => {
     const ReportCobrados = await Premios.findAll({
       attributes: [
         'TERCERO',
-        [fn('COUNT', EvaluarTipLAFT('LOCAL')), 'CANT_PREMIOS_CHANCE'],
-        [fn('COUNT', EvaluarTipLAFT('ASTRO')), 'CANT_PREMIOS_ASTRO'],
-        [fn('COUNT', EvaluarTipLAFT('REMOTO')), 'CANT_PREMIOS_LOTERIA'],
-        [fn('COUNT', EvaluarTipLAFT2('107')), 'CANT_PREMIOS_RASPE'],
+        [fn('COUNT', EvaluarTipoPremio('LOCAL')), 'CANT_PREMIOS_CHANCE'],
+        [fn('COUNT', EvaluarTipoPremio('ASTRO')), 'CANT_PREMIOS_ASTRO'],
+        [fn('COUNT', EvaluarTipoPremio('REMOTO')), 'CANT_PREMIOS_LOTERIA'],
+        [fn('COUNT', EvaluarTipoJuego('107')), 'CANT_PREMIOS_RASPE'],
         [fn('SUM', col('PREMIO')), 'TOTAL_PREMIOS_COBRADOS'],
       ],
       where: {
