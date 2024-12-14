@@ -1,4 +1,4 @@
-import { DB_ORACLE_DIR, DB_ORACLE_DIR_TNS, DB_ORACLE_NAME, DB_ORACLE_PASS, DB_ORACLE_USER } from '../config/envOracleDb';
+import { DB_ORACLE_DIR, DB_ORACLE_DIR_TNS, DB_ORACLE_NAME, DB_ORACLE_PASS, DB_ORACLE_USER } from '@config/envOracleDb';
 import oracledb, { Pool } from 'oracledb';
 
 oracledb.initOracleClient({ libDir: DB_ORACLE_DIR });

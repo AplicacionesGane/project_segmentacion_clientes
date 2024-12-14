@@ -1,6 +1,6 @@
 import { Model, InferAttributes, InferCreationAttributes, DataTypes } from 'sequelize';
-import PowerBi from '../connection/mysqldb'
-import { Client } from './clientes.model';
+import { Client } from '@models/clientes.model';
+import PowerBi from '@connections/mysqldb'
 
 class Premios extends Model<InferAttributes<Premios>, InferCreationAttributes<Premios>> {
   declare FECHAPAGO: Date;

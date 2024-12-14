@@ -1,9 +1,9 @@
-import { Premios } from '../models/premios.model';
-import { CantidadPremios } from '../services';
+import { CantidadPremios } from '@services/index';
+import { col, fn, literal, Op } from 'sequelize';
+import { Premios } from '@models/premios.model';
+import { Client } from '@models/clientes.model';
 import { Request, Response } from 'express';
-import { cast, col, fn, literal, Op } from 'sequelize';
-import { generateData } from '../utils';
-import { Client } from '../models/clientes.model';
+import { generateData } from '@utils/index';
 
 export const getInfo = async (req: Request, res: Response) => {
   const fecha: string | undefined = req.query.fecha as string | undefined;

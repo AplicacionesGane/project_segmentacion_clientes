@@ -1,5 +1,5 @@
-import { getInfo, getInfo2, getReportBaloto, getClientesGanadores } from '../controllers/info.controllers';
-import { getReportCobrados, getReportLAFT, getReportMayores } from '../controllers/report.controllers';
+import { getInfo, getInfo2, getReportBaloto, getClientesGanadores } from '@controllers/info.controllers';
+import { getReportCobrados, getReportLAFT, getReportMayores } from '@controllers/report.controllers';
 import { Router } from "express";
 
 

@@ -1,4 +1,4 @@
-import { connectionOracle } from '../connection/oracledb';
+import { connectionOracle } from '@connections/oracledb';
 import { Request, Response } from 'express';
 import { Connection } from 'oracledb';
 
@@ -16,7 +16,7 @@ export type RowType = [
 
 const FunBetweenDates = (startDate: string, endDate: string) => `fechapago BETWEEN TO_DATE('${startDate}', 'DD/MM/YYYY') AND TO_DATE('${endDate}', 'DD/MM/YYYY')`;
 const aplanarString = (arr: number[]) => arr.map((el) => `'${el}'`).join(',');
-const municipio = (zona: '39627' | '39628') => zona === '39627' ? `39629, 39630, 39631` : `39632`;	
+const municipio = (zona: '39627' | '39628') => zona === '39627' ? `39629, 39630, 39631` : `39632`;
 
 export const getReportOracle = async (req: Request, res: Response) => {
   const data = req.body;
@@ -26,7 +26,7 @@ export const getReportOracle = async (req: Request, res: Response) => {
   if (!fecha1 || !fecha2 || !zona) {
     res.status(400).json('Fechas y zona son requeridas');
   }
-  
+
   const fecha1Reverse = fecha1.split('-').reverse().join('/');
   const fecha2Reverse = fecha2.split('-').reverse().join('/');
 

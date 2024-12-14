@@ -1,7 +1,7 @@
-import { getAllClients, getClientById, getClientByFN, updateCliente, getAllClientsNuevos, updateClientes } from '../controllers/clientes.controllers';
+import { getAllClients, getClientById, getClientByFN, updateCliente, getAllClientsNuevos, updateClientes } from '@controllers/clientes.controllers';
 
 // TODO: este es una funcion que solo se usa para pruebas
-import { insertTest } from '../controllers/insertTest';
+import { insertTest } from '@controllers/insertTest';
 
 import { Router } from 'express';
 

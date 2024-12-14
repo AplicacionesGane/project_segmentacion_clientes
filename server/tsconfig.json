@@ -31,7 +31,7 @@
         "src/types/*"
       ],
       "@connections/*": [
-        "src/connections/*"
+        "src/connection/*"
       ],
       "@config/*": [
         "src/config/*"
