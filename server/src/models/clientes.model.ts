@@ -1,5 +1,5 @@
 import { Model, DataTypes, Optional } from 'sequelize';
-import db_connection from '../connection';
+import db_connection from '../connection/mysqldb';
 
 interface ClienteAttributes {
   FECHACARGA: Date;

@@ -1,5 +1,5 @@
 import { Model, InferAttributes, InferCreationAttributes, DataTypes } from 'sequelize';
-import PowerBi from '../connection'
+import PowerBi from '../connection/mysqldb'
 import { Client } from './clientes.model';
 
 class Premios extends Model<InferAttributes<Premios>, InferCreationAttributes<Premios>> {
