@@ -1,8 +1,8 @@
-import { clientRoutes } from './routes/clientes.routes';
-import { oracleRouter } from './routes/oracle.routes';
-import { infoRouter } from './routes/info.routes';
+import { clientRoutes } from '@routes/clientes.routes';
+import { oracleRouter } from '@routes/oracle.routes';
+import { infoRouter } from '@routes/info.routes';
 
-import { PORT, ORIGIN } from './config/enviroments';
+import { PORT, ORIGIN } from '@config/enviroments';
 
 import express from 'express';
 import log from 'morgan';

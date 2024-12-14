@@ -3,11 +3,45 @@
     "target": "ES6",
     "module": "commonjs",
     "outDir": "./dist",
-    "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "rootDir": "./src",
+    "baseUrl": "./",
+    "paths": {
+      "@models/*": [
+        "src/models/*"
+      ],
+      "@controllers/*": [
+        "src/controllers/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@routes/*": [
+        "src/routes/*"
+      ],
+      "@schemas/*": [
+        "src/schemas/*"
+      ],
+      "@services/*": [
+        "src/services/*"
+      ],
+      "@type/*": [
+        "src/types/*"
+      ],
+      "@connections/*": [
+        "src/connections/*"
+      ],
+      "@config/*": [
+        "src/config/*"
+      ]
+    }
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

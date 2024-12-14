@@ -1,4 +1,4 @@
-import { ConsultaResultAttrib } from '../types/interface';
+import { ConsultaResultAttrib } from '@type/interface';
 
 export const generateData = (result: ConsultaResultAttrib) => [
   { id: 1, label: `${result.Menor} - Menor a 15 UVT`, value: parseInt(result.Menor.toString()) },
