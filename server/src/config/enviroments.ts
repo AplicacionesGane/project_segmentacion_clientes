@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 const envSchema = z.object({
   PORT: z.string().min(1, 'Variable PORT is required'),
-  ORIGIN: z.string().url().default('http://localhost:3000'),
+  ORIGIN: z.string().min(1, 'Variable ORIGIN is required').url().default('http://localhost:3000'),
   DB_HOST: z.string().min(1, 'Variable DB_HOST is required'),
   DB_PORT: z.string().min(1, 'Variable DB_PORT is required'),
   DB_USER: z.string().min(1, 'Variable DB_USER is required'),
