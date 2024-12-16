@@ -5,11 +5,12 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsx watch --env-file=.env ./src/index.ts",
-    "start": "node --env-file=.env ./dist/index.js"
+    "start": "node -r module-alias/register --env-file=.env ./dist/index.js"
   },
   "dependencies": {
     "cors": "2.8.5",
-    "express": "^4.21.2",
+    "express": "4.21.2",
+    "module-alias": "2.2.3",
     "mysql2": "3.11.3",
     "oracledb": "6.7.0",
     "sequelize": "6.37.3",
@@ -25,5 +26,16 @@
     "morgan": "1.10.0",
     "tsx": "4.19.1",
     "typescript": "5.6.2"
+  },
+  "_moduleAliases": {
+    "@models": "dist/models",
+    "@controllers": "dist/controllers",
+    "@utils": "dist/utils",
+    "@routes": "dist/routes",
+    "@schemas": "dist/schemas",
+    "@services": "dist/services",
+    "@types": "dist/types",
+    "@connections": "dist/connection",
+    "@config": "dist/config"
   }
 }
