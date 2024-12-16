@@ -1,18 +1,7 @@
 import { connectionOracle } from '@connections/oracledb';
 import { Request, Response } from 'express';
+import { RowType } from '@type/interface';
 import { Connection } from 'oracledb';
-
-export type RowType = [
-  string, // FECHAPAGO
-  string, // SERIE
-  number, // PREMIO
-  string, // VENDEDOR
-  string, // NOMBRES
-  string, // HORA
-  number, // PUNTO_VTA_PAGO
-  number, // APLICACION
-  string // MUNICIPIO
-];
 
 const FunBetweenDates = (startDate: string, endDate: string) => `fechapago BETWEEN TO_DATE('${startDate}', 'DD/MM/YYYY') AND TO_DATE('${endDate}', 'DD/MM/YYYY')`;
 const aplanarString = (arr: number[]) => arr.map((el) => `'${el}'`).join(',');
@@ -44,33 +33,27 @@ export const getReportOracle = async (req: Request, res: Response) => {
     // unir los arrays de arrays en un solo array
     const arrayUsers = rows?.flat();
     const strUsers = aplanarString(arrayUsers!);
+    const datesStr = FunBetweenDates(fecha1Reverse, fecha2Reverse);
+    const zonaStr = municipio(zona);
 
     const { rows: rows2, metaData } = await connection.execute<RowType[]>(
       `
       SELECT 
-        TT.FECHAPAGO, TT.SERIE, TT.PREMIO, TT.VENDEDOR, UPPER(PE.NOMBRES||' '||PE.APELLIDO1||' '||PE.APELLIDO2) NOMBRES,
-        TT.HORA, TT.PUNTO_VTA_PAGO, TT.APLICACION, DECODE(UN.TRTRIO_CODIGO_COMPUESTO_DE, 39629,'YUMBO',39630,'VIJES',39631,'CUMBRE',39632,'JAMUNDI', UN.TRTRIO_CODIGO_COMPUESTO_DE) MUNICIPIO
+        TT.FECHAPAGO, TT.SERIE, TT.PREMIO, TT.VENDEDOR, TT.HORA, TT.PUNTO_VTA_PAGO, TT.DOCUMENTOTERCERO CLIENTE,
+        UPPER(PE.NOMBRES||' '||PE.APELLIDO1||' '||PE.APELLIDO2) NOMBRES,
+        UPPER(CL.NOMBRES||' '||CL.APELLIDO1||' '||CL.APELLIDO2) NOMBRECLIENTE,
+        UN.TRTRIO_CODIGO_COMPUESTO_DE MUNICIPIO
       FROM(
-        SELECT FECHAPAGO, SERIE||NUMERO SERIE, TOTALPREMIO-RETEFUENTE PREMIO, SUBSTR(LOGINCAJERO,4) VENDEDOR, HORA, PUNTO_VTA_PAGO, 1 APLICACION
-        FROM premiospersonaproveedor
-        WHERE ${FunBetweenDates(fecha1Reverse, fecha2Reverse)}
-        AND documentocajero IN (${strUsers})
-      UNION ALL
-        SELECT FECHAPAGO, SERIE||NUMERO, TOTALPREMIO-RETEFUENTE PREMIO, SUBSTR(LOGINCAJERO,4) VENDEDOR, HORA, PUNTO_VTA_PAGO, 2 APLICACION
-        FROM premiospersonaproveedor@CONSULTAS 
-        WHERE ${FunBetweenDates(fecha1Reverse, fecha2Reverse)}
-        AND documentocajero in (${strUsers})
-        AND serie||numero NOT IN (
-          SELECT distinct SERIE||NUMERO FROM premiospersonaproveedor 
-          WHERE ${FunBetweenDates(fecha1Reverse, fecha2Reverse)}
-          AND documentocajero IN (${strUsers})
-          )
-        )
-      TT, PERSONAS PE, UBICACIONNEGOCIOS UN
-      WHERE PE.DOCUMENTO=TT.VENDEDOR
-      AND UN.TRTRIO_CODIGO=TT.PUNTO_VTA_PAGO
-      AND UN.TRTRIO_CODIGO_COMPUESTO_DE IN (${municipio(zona)}) 
-      ORDER BY TT.FECHAPAGO,TT.APLICACION
+        select FECHAPAGO, SERIE||NUMERO SERIE, TOTALPREMIO-RETEFUENTE PREMIO, SUBSTR(LOGINCAJERO,4) VENDEDOR, HORA, PUNTO_VTA_PAGO, DOCUMENTOTERCERO 
+        from premiospersonaproveedor@CONSULTAS
+        where ${datesStr}
+        and documentocajero in (${strUsers})
+      )TT
+      LEFT JOIN PERSONAS PE ON (PE.DOCUMENTO=TT.VENDEDOR)
+      LEFT JOIN PERSONAS CL ON (CL.DOCUMENTO=TT.DOCUMENTOTERCERO)
+      LEFT JOIN UBICACIONNEGOCIOS UN ON (UN.TRTRIO_CODIGO=TT.PUNTO_VTA_PAGO)
+      WHERE UN.TRTRIO_CODIGO_COMPUESTO_DE IN (${zonaStr})
+      ORDER BY TT.FECHAPAGO 
       `
     );
 
@@ -80,8 +63,6 @@ export const getReportOracle = async (req: Request, res: Response) => {
         return acc;
       }, {} as Record<string | number, any>);
     });
-
-    console.log(data?.length);
 
     res.status(200).json(data);
   } catch (error) {
