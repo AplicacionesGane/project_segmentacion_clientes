@@ -6,20 +6,9 @@ import { URL_API_DATA } from '../utils/contanst';
 import { FormEvent, useState } from 'react';
 import { Label } from '../components/Label';
 import axios from 'axios';
+import { formatPrice, municipioString } from '../utils/funtions';
 
-const formatPrice = (price: number) => {
-  return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(price);
-}
 
-const municipioString = (municipio: number): string => {
-  const municipios: { [key: string]: string } = {
-    39629: 'YUMBO',
-    39630: 'VIJES',
-    39631: 'CUMBRE',
-    39632: 'JAMUNDI'
-  };
-  return municipios[municipio] || 'NO DEFINIDO';
-}
 
 export default function ReportOracle() {
   const [date1, setDate1] = useState<string>('')
@@ -54,7 +43,7 @@ export default function ReportOracle() {
   return (
     <section className='relative flex flex-col'>
 
-      <div className='w-full flex gap-4 px-2 pt-1 items-center border-b pb-2'>
+      <div className='w-full flex gap-4 px-2 pt-1 justify-around items-center border-b pb-2'>
         <div>
           <Label className='font-semibold'>Fecha Inicial: </Label>
           <input type='date' className='p-2 rounded-md' value={date1} onChange={ev => setDate1(ev.target.value)} />
@@ -65,7 +54,8 @@ export default function ReportOracle() {
           <input type='date' className='p-2 rounded-md' value={date2} onChange={ev => setDate2(ev.target.value)} />
         </div>
 
-        <form onSubmit={handleSubmit} className='gap-2 flex'>
+        <form onSubmit={handleSubmit} className='gap-2 flex items-center'>
+          <Label className='font-semibold'>Empresa: </Label>
           <select name='zona' className='px-4 rounded-md w-52' value={zona} onChange={e => setZona(e.target.value)}>
             <option value=' '>Selecione Empresa</option>
             <option value='39627'>Multired</option>
