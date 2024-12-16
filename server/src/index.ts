@@ -1,16 +1,19 @@
-import { clientRoutes } from './routes/clientes.routes';
-import { oracleRouter } from './routes/oracle.routes';
-import { infoRouter } from './routes/info.routes';
-import { PORT } from './config';
+import { clientRoutes } from '@routes/clientes.routes';
+import { oracleRouter } from '@routes/oracle.routes';
+import { infoRouter } from '@routes/info.routes';
+
+import { PORT, ORIGIN } from '@config/enviroments';
+
 import express from 'express';
 import log from 'morgan';
 import cors from 'cors';
+
 const app = express();
 
 app.use(express.json());
 app.use(cors(
   {
-    origin: process.env.CLIENT_URL || '',
+    origin: ORIGIN,
     credentials: true
   }
 ));

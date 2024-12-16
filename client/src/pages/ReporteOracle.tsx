@@ -6,6 +6,9 @@ import { URL_API_DATA } from '../utils/contanst';
 import { FormEvent, useState } from 'react';
 import { Label } from '../components/Label';
 import axios from 'axios';
+import { formatPrice, municipioString } from '../utils/funtions';
+
+
 
 export default function ReportOracle() {
   const [date1, setDate1] = useState<string>('')
@@ -28,20 +31,19 @@ export default function ReportOracle() {
 
     axios.post(`${URL_API_DATA}/oracle/report`, { fecha1: date1.slice(0, 10), fecha2: date2.slice(0, 10), zona })
       .then(res => {
-        console.log(res.data);
         setData(res.data);
         setLoading(false);
       })
       .catch(err => {
         console.log(err);
       })
-      .finally(() => setLoading(false) )
+      .finally(() => setLoading(false))
   }
 
   return (
     <section className='relative flex flex-col'>
 
-      <div className='w-full flex gap-4 px-2 pt-1 items-center border-b pb-2'>
+      <div className='w-full flex gap-4 px-2 pt-1 justify-around items-center border-b pb-2'>
         <div>
           <Label className='font-semibold'>Fecha Inicial: </Label>
           <input type='date' className='p-2 rounded-md' value={date1} onChange={ev => setDate1(ev.target.value)} />
@@ -52,7 +54,8 @@ export default function ReportOracle() {
           <input type='date' className='p-2 rounded-md' value={date2} onChange={ev => setDate2(ev.target.value)} />
         </div>
 
-        <form onSubmit={handleSubmit} className='gap-2 flex'>
+        <form onSubmit={handleSubmit} className='gap-2 flex items-center'>
+          <Label className='font-semibold'>Empresa: </Label>
           <select name='zona' className='px-4 rounded-md w-52' value={zona} onChange={e => setZona(e.target.value)}>
             <option value=' '>Selecione Empresa</option>
             <option value='39627'>Multired</option>
@@ -83,30 +86,32 @@ export default function ReportOracle() {
         <Table>
           <TableHead className='bg-blue-100'>
             <TableRow>
-              <TableHeaderCell>FECHA PAGO</TableHeaderCell>
+              <TableHeaderCell>FECHA</TableHeaderCell>
               <TableHeaderCell>SERIE</TableHeaderCell>
-              <TableHeaderCell>Valor Premio</TableHeaderCell>
+              <TableHeaderCell>$ PREMIO</TableHeaderCell>
               <TableHeaderCell>VENDEDOR</TableHeaderCell>
               <TableHeaderCell>NOMBRES</TableHeaderCell>
               <TableHeaderCell>HORA</TableHeaderCell>
-              <TableHeaderCell>PUNTO_VTA_PAGO</TableHeaderCell>
-              <TableHeaderCell>APLICACION</TableHeaderCell>
+              <TableHeaderCell>PUNTO PAGO</TableHeaderCell>
               <TableHeaderCell>MUNICIPIO</TableHeaderCell>
+              <TableHeaderCell>CLIENTE</TableHeaderCell>
+              <TableHeaderCell>NOMBRE CL</TableHeaderCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {
               data.map((item, index) => (
                 <TableRow key={index}>
-                  <TableCell>{item.fechapago}</TableCell>
+                  <TableCell>{item.fechapago.split('T')[0]}</TableCell>
                   <TableCell>{item.serie}</TableCell>
-                  <TableCell>{item.premio}</TableCell>
-                  <TableCell>{item.vendedor}</TableCell>
+                  <TableCell className='text-right'>{formatPrice(item.premio)}</TableCell>
+                  <TableCell className='text-right'>{item.vendedor}</TableCell>
                   <TableCell>{item.nombres}</TableCell>
                   <TableCell>{item.hora}</TableCell>
                   <TableCell>{item.punto_vta_pago}</TableCell>
-                  <TableCell>{item.aplicacion}</TableCell>
-                  <TableCell>{item.municipio}</TableCell>
+                  <TableCell>{municipioString(item.municipio)}</TableCell>
+                  <TableCell>{item.cliente}</TableCell>
+                  <TableCell>{item.nombrecliente}</TableCell>
                 </TableRow>
               ))
             }

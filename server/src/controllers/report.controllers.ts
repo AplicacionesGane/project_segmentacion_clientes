@@ -1,7 +1,7 @@
-import { Premios } from '../models/premios.model';
+import { col, fn, literal, Op } from 'sequelize';
+import { Premios } from '@models/premios.model';
+import { Client } from '@models/clientes.model';
 import { Request, Response } from 'express';
-import {col, fn, literal, Op } from 'sequelize';
-import { Client } from '../models/clientes.model';
 
 const EvaluarTipoPremio = (tipo: string) => literal(`CASE WHEN TIPOPREMIO IN ('${tipo}') THEN 1 END`);
 const EvaluarTipoJuego = (tipo: string) => literal(`CASE WHEN TIPOJUEGO IN ('${tipo}') THEN 1 END`);
@@ -139,7 +139,7 @@ export const getReportLAFT = async (req: Request, res: Response) => {
         model: Client,
         required: true,
       }],
-      group: ['TIPODOCUMENTO', 'TERCERO', 'NOMBRES', 'TELEFONO1', 'DIRECCION','PEP'],
+      group: ['TIPODOCUMENTO', 'TERCERO', 'NOMBRES', 'TELEFONO1', 'DIRECCION', 'PEP'],
       order: [[fn('SUM', col('PREMIO')), 'DESC']]
     });
 

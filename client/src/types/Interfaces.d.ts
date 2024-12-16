@@ -99,31 +99,32 @@ export enum Tipodocumento {
 
 
 export interface ReportLaft {
-  TERCERO:                string;
-  CANT_PREMIOS_CHANCE:    number;
-  CANT_PREMIOS_ASTRO:     number;
-  CANT_PREMIOS_LOTERIA:   number;
-  CANT_PREMIOS_RASPE:     number;
+  TERCERO: string;
+  CANT_PREMIOS_CHANCE: number;
+  CANT_PREMIOS_ASTRO: number;
+  CANT_PREMIOS_LOTERIA: number;
+  CANT_PREMIOS_RASPE: number;
   TOTAL_PREMIOS_COBRADOS: string;
-  Client:                 Laft;
+  Client: Laft;
 }
 
 export interface Laft {
   TIPODOCUMENTO: string;
-  NOMBRES:       string;
-  DIRECCION:     string;
-  TELEFONO1:     string;
-  PEP:           string;
+  NOMBRES: string;
+  DIRECCION: string;
+  TELEFONO1: string;
+  PEP: string;
 }
 
 export interface ReportOracleInterface {
-  fechapago: string
-  serie: string
-  premio: number
-  vendedor: number
-  nombres: string
-  hora: string
-  punto_vta_pago: number
-  aplicacion: string
-  municipio: string
+  fechapago: string;
+  serie: string;
+  premio: number;
+  vendedor: string;
+  hora: string;
+  punto_vta_pago: number;
+  cliente: number;
+  nombres: string;
+  nombrecliente: string;
+  municipio: number;
 }

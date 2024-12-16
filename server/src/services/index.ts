@@ -1,5 +1,5 @@
-import { ConsultaResultAttrib } from '../types/interface';
-import { Premios } from '../models/premios.model';
+import { ConsultaResultAttrib } from '@type/interface';
+import { Premios } from '@models/premios.model';
 import { fn, literal } from 'sequelize';
 
 const cantMin = 15

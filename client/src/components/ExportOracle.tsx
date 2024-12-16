@@ -1,33 +1,36 @@
 import { ReportOracleInterface } from '../types/Interfaces'
 import { utils, ColInfo, writeFile } from 'xlsx'
 import { toast } from 'sonner'
+import { municipioString } from '../utils/funtions'
 
 const generateExcelData = (datos: ReportOracleInterface[]): unknown[] => {
-  const titulo = [{ A: 'Reporte Premios Pagados Baloto ' }]
+  const titulo = [{ A: 'Reporte Premios Pagados en PDV (CP2) Oracle' }]
   const headers = [
     {
-      A: 'FECHAPAGO',
+      A: 'FECHA',
       B: 'SERIE',
       C: 'PREMIO',
       D: 'VENDEDOR',
       E: 'NOMBRES',
       F: 'HORA',
-      G: 'PUNTO_VTA_PAGO',
-      H: 'APLICACION',
-      I: 'MUNICIPIO'
+      G: 'PUNTO_PAGO',
+      H: 'MUNICIPIO',
+      I: 'CLIENTE',
+      J: 'NOMBRE_CL'
     }
   ]
 
   const rows = datos.map((it) => ({
-    A: it.fechapago,
+    A: it.fechapago.split('T')[0],
     B: it.serie,
     C: it.premio,
     D: it.vendedor,
     E: it.nombres,
     F: it.hora,
     G: it.punto_vta_pago,
-    H: it.aplicacion,
-    I: it.municipio
+    H: municipioString(it.municipio),
+    I: it.cliente,
+    J: it.nombrecliente
   }))
 
   return [...titulo, ...headers, ...rows]

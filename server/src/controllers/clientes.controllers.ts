@@ -1,5 +1,5 @@
-import { validateUpdate } from '../schemas/update';
-import { Client } from '../models/clientes.model';
+import { validateUpdate } from '@schemas/update';
+import { Client } from '@models/clientes.model';
 import { Request, Response } from 'express';
 import { Op } from 'sequelize';
 
@@ -139,7 +139,7 @@ export const updateClientes = async (req: Request, res: Response) => {
 
   const { documentos, categoria, tipozona } = result.data;
 
-  if(categoria === undefined && tipozona === undefined) {
+  if (categoria === undefined && tipozona === undefined) {
     res.status(400).json({ message: 'Se debe seleccionar mínimo un campo a actualizar' });
     return;
   }

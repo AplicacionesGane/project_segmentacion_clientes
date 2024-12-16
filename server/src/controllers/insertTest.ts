@@ -1,6 +1,6 @@
-import { Client, ClienteAttributes } from '../models/clientes.model';
-import { faker } from '@faker-js/faker';
+import { Client, ClienteAttributes } from '@models/clientes.model';
 import { Request, Response } from 'express';
+import { faker } from '@faker-js/faker';
 
 const cantidad = 1000;
 
@@ -12,7 +12,7 @@ export const insertTest = async (req: Request, res: Response) => {
       data.push({
         FECHACARGA: faker.date.recent(),
         TIPODOCUMENTO: 'CC',
-        DOCUMENTO: faker.number.int({ min: 0, max: 999999990}).toString(),
+        DOCUMENTO: faker.number.int({ min: 0, max: 999999990 }).toString(),
         NOMBRES: faker.person.firstName(),
         FECHANACIMIENTO: faker.date.past(),
         CATEGORIA: null,
