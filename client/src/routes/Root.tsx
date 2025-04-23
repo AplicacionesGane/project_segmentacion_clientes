@@ -8,9 +8,9 @@ import NavBar from '../components/NavBar';
 const LoginPage = lazy(() => import('../pages/LoginPage'));
 
 function Root() {
-  const { user, isAuthenticated } = useAuth();
+  const { user } = useAuth();
 
-  if (!user || !isAuthenticated) {
+  if (!user) {
     return (
       <Suspense fallback={<div>Loading...</div>}>
         <LoginPage />
