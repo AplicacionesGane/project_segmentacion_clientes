@@ -2,8 +2,9 @@ version: '3.7'
 
 services:
   web_segmentacion:
-    image: nginx:stable-alpine3.19-slim
+    image: nginx:stable-alpine3.21-perl
     container_name: web_segmentacion
+    restart: always
     volumes:
       - ./client/dist:/usr/share/nginx/html
       - ./nginx.conf:/etc/nginx/nginx.conf
@@ -15,7 +16,8 @@ services:
       context: ./server
       dockerfile: Dockerfile
     container_name: api_segmentacion
-    image: api-segmentacion-v1.0
+    restart: always
+    image: api-segmentacion-v1.1
     networks:
       - red-gane-int
     environment:
