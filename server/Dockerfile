@@ -1,4 +1,4 @@
-FROM node:lts
+FROM node:lts-slim
 
 WORKDIR /app
 
@@ -7,8 +7,11 @@ COPY . /app
 # Instalar dependencias necesarias
 RUN apt-get update && apt-get install -y libaio1
 
+# install pnpm library
+RUN npm install -g pnpm
+
 # Instalar dependencias y construir la aplicación
-RUN npm install && node --run build
+RUN pnpm install && node --run build
 
 # Configurar Oracle Instant Client
 RUN mkdir -p /opt/oracle && \
@@ -26,4 +29,4 @@ RUN echo "export LD_LIBRARY_PATH=/opt/oracle/instantclient_11_2:\$LD_LIBRARY_PAT
 
 EXPOSE 80
 
-CMD ["npm", "start"]
+CMD ["pnpm", "start"]
