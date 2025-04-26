@@ -27,7 +27,7 @@ pipeline {
       stage('install dependencies frontend') {
         steps {
           script {
-            sh 'cd client && npm install'
+            sh 'cd client && pnpm install'
             sh 'cd client && node --run build'
           }
         }
