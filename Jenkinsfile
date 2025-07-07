@@ -27,8 +27,8 @@ pipeline {
       stage('install dependencies frontend') {
         steps {
           script {
-            sh 'cd client && pnpm install'
-            sh 'cd client && node --run build'
+            sh 'cd client && bun install --frozen-lockfile'
+            sh 'cd client && bun run build'
           }
         }
       }

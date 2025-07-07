@@ -7,11 +7,11 @@ COPY . /app
 # Instalar dependencias necesarias
 RUN apt-get update && apt-get install -y libaio1
 
-# install pnpm library
-RUN npm install -g pnpm
+# install bun library
+RUN npm install -g bun
 
 # Instalar dependencias y construir la aplicación
-RUN pnpm install && node --run build
+RUN bun install && bun run build
 
 # Configurar Oracle Instant Client
 RUN mkdir -p /opt/oracle && \
