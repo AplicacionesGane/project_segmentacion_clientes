@@ -2,7 +2,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Categorizacion, TipoZona } from '../utils/contanst'
 import { useEditClient } from '../hooks/useEditClient';
 import { URL_API_DATA } from '../utils/contanst';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import { Input } from '../components/Input';
 import { Label } from '../components/Label';
 import { toast } from 'sonner';

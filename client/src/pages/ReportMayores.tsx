@@ -6,7 +6,6 @@ import Loading from '../components/ui/LoadingComp';
 import { URL_API_DATA } from '../utils/contanst';
 import axios from 'axios';
 
-
 export default function ReportesPage() {
   const [date1, setDate1] = useState(' ')
   const [date2, setDate2] = useState(' ')

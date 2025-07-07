@@ -1,7 +1,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from '../../components/Table';
 import { Categorizacion } from '../../utils/contanst';
 import { Cliente } from '../../types/Interfaces';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export const RenderClients = ({ clientes } : { clientes: Cliente[] }) => {
   const navigate = useNavigate();

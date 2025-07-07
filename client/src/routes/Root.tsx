@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 
 import { useAuth } from '../auth/AuthContext';
-import { Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router';
 import { Toaster } from 'sonner';
 import NavBar from '../components/NavBar';
 

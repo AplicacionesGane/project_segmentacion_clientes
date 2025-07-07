@@ -1,7 +1,7 @@
 import { RiHome2Line, RiGroupLine, RiUserAddLine, RiLogoutBoxLine, RiFileChartLine } from '@remixicon/react';
 import { LogoutAndDeleteToken } from '../services/LogOut';
-import { NavLink } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
+import { NavLink } from 'react-router';
 
 function NavBar() {
   const { setIsAuthenticated } = useAuth();

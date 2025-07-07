@@ -5,7 +5,7 @@ import { RenderFooterClients } from '../components/ui/RenderFooterClients';
 import { Categorizacion, TipoZona, URL_API_DATA } from '../utils/contanst';
 import { RiCloseCircleLine } from '@remixicon/react';
 import { useClientes } from '../hooks/useClientes';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { Label } from '../components/Label';
 import { useState, useRef } from 'react';
 import { toast } from 'sonner';

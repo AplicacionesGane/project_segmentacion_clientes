@@ -1,14 +1,12 @@
 import { Table, TableHead, TableBody, TableCell, TableHeaderCell, TableRow } from '../components/Table';
 import { BottonExporOracleReport } from '../components/ExportOracle';
+import { formatPrice, municipioString } from '../utils/funtions';
 import { ReportOracleInterface } from '../types/Interfaces';
 import Loading from '../components/ui/LoadingComp';
 import { URL_API_DATA } from '../utils/contanst';
 import { FormEvent, useState } from 'react';
 import { Label } from '../components/Label';
 import axios from 'axios';
-import { formatPrice, municipioString } from '../utils/funtions';
-
-
 
 export default function ReportOracle() {
   const [date1, setDate1] = useState<string>('')
