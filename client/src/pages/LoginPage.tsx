@@ -113,6 +113,7 @@ function LoginPage() {
                   <Button
                     disabled={loading}
                     type='submit'
+                    className='w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer'
                   >
                     {
                       loading ? (

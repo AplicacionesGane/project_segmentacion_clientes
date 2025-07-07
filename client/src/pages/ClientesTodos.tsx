@@ -1,10 +1,10 @@
 import { RenderFooterClients } from '@/components/ui/RenderFooterClients';
 import { HeaderPagesClientes } from '@/components/ui/header-pages-clientes';
-import { RenderClients } from '../components/ui/RenderClients';
-import { useClientes } from '../hooks/useClientes';
+import { RenderClients } from '@/components/ui/RenderClients';
+import { useClientes } from '@/hooks/useClientes';
 
 function ClientesTodos() {
-  const { page, setPage, setPageSize, totalClients, totalPages, search, setSearch } = useClientes({ url: 'clientes' });
+  const { page, setPage, setPageSize, totalClients, totalPages, search, setSearch, clients } = useClientes({ url: 'clientes' });
 
   return (
     <section className='h-screen flex flex-col bg-gray-50'>
@@ -19,7 +19,7 @@ function ClientesTodos() {
 
       {/* ...existing code... */}
       <section className='flex-1 overflow-y-auto'>
-        {/* <RenderClients clientes={clients} /> */}
+        <RenderClients clientes={clients} />
       </section>
 
       <RenderFooterClients page={page} totalPages={totalPages} setPage={setPage} />
