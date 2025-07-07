@@ -1,9 +1,8 @@
 import { lazy, Suspense } from 'react';
 
 import { useAuth } from '../auth/AuthContext';
-import NavBar from '../components/NavBar';
-import { Outlet } from 'react-router';
-import { Toaster } from 'sonner';
+import Loading from '@/components/loading'
+import Layout from './layout';
 
 const LoginPage = lazy(() => import('../pages/LoginPage'));
 
@@ -12,27 +11,17 @@ function Root() {
 
   if (!user) {
     return (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loading />}>
         <LoginPage />
       </Suspense>
     )
   }
 
   return (
-    <div className='bg-red-200'>
-      test
-    </div>
-  )
-
-  // return (
-  //   <section className='flex'>
-  //     <NavBar />
-  //     <main className='w-full'>
-  //       <Outlet />
-  //     </main>
-  //     <Toaster position='top-right' duration={5000} visibleToasts={4} richColors />
-  //   </section>
-  // )
+    <Suspense fallback={<Loading />}>
+      <Layout />
+    </Suspense>
+  );
 }
 
 export default Root;
