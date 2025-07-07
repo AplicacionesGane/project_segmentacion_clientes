@@ -2,6 +2,8 @@ import { createBrowserRouter } from 'react-router';
 import { lazy, Suspense } from 'react';
 import Root from './Root';
 
+import Loading from '@/components/loading'
+
 const ClienteNuevosPage = lazy(() => import('../pages/ClientesNuevos'));
 const SeleccionReportes = lazy(() => import('../pages/SeleccionReportes'));
 const ReportClienteGanadores = lazy(() => import('../pages/ReporteClientGan'));
@@ -22,48 +24,50 @@ export const BrowserRouter = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Suspense fallback={<div>Loading...</div>}><ClienteTodosPage /></Suspense>
+        element: <Suspense fallback={<Loading />}><ClienteTodosPage /></Suspense>
       },
+      /*
       {
         path: 'clientes-nuevos',
-        element: <Suspense fallback={<div>Loading...</div>}><ClienteNuevosPage /></Suspense>
+        element: <Suspense fallback={<Loading />}><ClienteNuevosPage /></Suspense>
       },
       {
         path: 'editar-cliente/:id',
-        element: <Suspense fallback={<div>Loading...</div>}><EditarClientePage /></Suspense>
+        element: <Suspense fallback={<Loading />}><EditarClientePage /></Suspense>
       },
       {
         path: 'dashboard',
-        element: <Suspense fallback={<div>Loading...</div>}><Dashboard /></Suspense>
+        element: <Suspense fallback={<Loading />}><Dashboard /></Suspense>
       },
       {
         path: 'reportes',
-        element: <Suspense fallback={<div>Loading...</div>}><SeleccionReportes /></Suspense>
+        element: <Suspense fallback={<Loading />}><SeleccionReportes /></Suspense>
       },
       {
         path: 'reportBaloto',
-        element: <Suspense fallback={<div>Loading...</div>}><ReporteBaloto /></Suspense>
+        element: <Suspense fallback={<Loading />}><ReporteBaloto /></Suspense>
       },
       {
         path: 'reportClientGanadores',
-        element: <Suspense fallback={<div>Loading...</div>}><ReportClienteGanadores /></Suspense>
+        element: <Suspense fallback={<Loading />}><ReportClienteGanadores /></Suspense>
       },
       {
         path: 'reportCobrados',
-        element: <Suspense fallback={<div>Loading...</div>}><ReportCobrados /></Suspense>
+        element: <Suspense fallback={<Loading />}><ReportCobrados /></Suspense>
       },
       {
         path: 'reportPremiosMayores',
-        element: <Suspense fallback={<div>Loading...</div>}><ReportMayores /></Suspense>
+        element: <Suspense fallback={<Loading />}><ReportMayores /></Suspense>
       },
       {
         path: 'reporteLAFT',
-        element: <Suspense fallback={<div>Loading...</div>}><ReportLaft /></Suspense>
+        element: <Suspense fallback={<Loading />}><ReportLaft /></Suspense>
       },
       {
         path: 'reportOracle',
-        element: <Suspense fallback={<div>Loading...</div>}><ResportOracle /></Suspense>
+        element: <Suspense fallback={<Loading />}><ResportOracle /></Suspense>
       }
+      */
     ]
   }
 ]);

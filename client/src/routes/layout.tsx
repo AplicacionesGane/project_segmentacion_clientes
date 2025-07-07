@@ -1,10 +1,12 @@
 import { Outlet } from "react-router";
 import { Toaster } from "sonner";
 
+import NavBar from "@/components/NavBar";
+
 export default function Layout() {
   return (
     <section className='flex'>
-      {/* <NavBar /> */}
+      <NavBar />
       <main className='w-full'>
         <Outlet />
       </main>

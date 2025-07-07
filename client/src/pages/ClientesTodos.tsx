@@ -23,15 +23,15 @@ function ClientesTodos() {
         </div>
 
         <div className='flex items-center gap-2'>
-          <SelectCantidadClientes setPageSize={setPageSize} />
+          {/* <SelectCantidadClientes setPageSize={setPageSize} /> */}
         </div>
       </section>
 
       <section className='h-[90vh] overflow-y-auto'>
-        <RenderClients clientes={clients} />
+        {/* <RenderClients clientes={clients} /> */}
       </section>
 
-      <RenderFooterClients page={page} totalPages={totalPages} setPage={setPage} />
+      {/* <RenderFooterClients page={page} totalPages={totalPages} setPage={setPage} /> */}
 
     </section>
   )
