@@ -1,3 +1,5 @@
+import { ChevronLeft, ChevronRight } from "lucide-react"
+
 interface PropsFooter {
   page: number;
   totalPages: number;
@@ -6,19 +8,47 @@ interface PropsFooter {
 
 export const RenderFooterClients = ({ page, totalPages, setPage }: PropsFooter) => {
   return (
-    <footer className='flex items-center justify-center py-1 bg-yellow-50 gap-2'>
-      <button disabled={page === 1} onClick={() => setPage((prev) => prev - 1)}
-        className={` ${page === 1 ? 'hover:bg-red-200' : 'hover:bg-green-200'} px-2 py-1 text-sm font-medium text-gray-800 bg-gray-100 border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-100 dark:border-gray-800  transition-colors`}>
-        Previous
+    <footer className='flex items-center justify-between py-4 bg-white border-t border-gray-200 shadow-sm'>
+      {/* Previous Button */}
+      <button 
+        disabled={page === 1} 
+        onClick={() => setPage((prev) => prev - 1)}
+        className={`
+          flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200
+          ${page === 1 
+            ? 'text-gray-400 bg-gray-50 cursor-not-allowed' 
+            : 'text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm'
+          }
+        `}
+      >
+        <ChevronLeft size={16} />
+        <span>Anterior</span>
       </button>
 
-      <span>{page} de {totalPages}</span>
+      {/* Page Indicator */}
+      <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 px-3 py-2 bg-blue-50 border border-blue-200 rounded-lg">
+          <span className="text-sm font-medium text-blue-700">
+            Página {page} de {totalPages}
+          </span>
+        </div>
+      </div>
 
-      <button disabled={page === totalPages} onClick={() => setPage((prev) => prev + 1)}
-        className={` ${page === totalPages ? 'hover:bg-red-200' : 'hover:bg-green-200'} px-2 py-1 text-sm font-medium text-gray-800 bg-gray-100 border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-100 dark:border-gray-800  transition-colors`} >
-        Next
+      {/* Next Button */}
+      <button 
+        disabled={page === totalPages} 
+        onClick={() => setPage((prev) => prev + 1)}
+        className={`
+          flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200
+          ${page === totalPages 
+            ? 'text-gray-400 bg-gray-50 cursor-not-allowed' 
+            : 'text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm'
+          }
+        `}
+      >
+        <span>Siguiente</span>
+        <ChevronRight size={16} />
       </button>
-
     </footer>
   )
 }

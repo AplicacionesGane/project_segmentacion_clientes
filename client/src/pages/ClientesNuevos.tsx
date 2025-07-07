@@ -1,6 +1,6 @@
 import { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from '../components/Table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/Select';
-import { SelectCantidadClientes } from '../components/ui/SelectCantClients';
+import { SelectCantidadClientes } from '../components/ui/select-can-clientes';
 import { RenderFooterClients } from '../components/ui/RenderFooterClients';
 import { Categorizacion, TipoZona, URL_API_DATA } from '../utils/contanst';
 import { RiCloseCircleLine } from '@remixicon/react';
