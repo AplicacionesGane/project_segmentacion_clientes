@@ -13,9 +13,9 @@ const ReportClienteGanadores = lazy(() => import('@/pages/reports/clientes-mas-g
 const ReportCobrados = lazy(() => import('@/pages/reports/cobrados-colocador'));
 const ReportMayores = lazy(() => import('@/pages/reports/mayores-15uvt'));
 const ReportLaft = lazy(() => import('@/pages/reports/report-laft'));
+const ReportOracle = lazy(() => import('@/pages/reports/premios-pagados'));
 
 // const Dashboard = lazy(() => import('@/pages/Dashboard'));
-// const ResportOracle = lazy(() => import('@/pages/ReporteOracle'));
 
 
 export const BrowserRouter = createBrowserRouter([
@@ -60,15 +60,15 @@ export const BrowserRouter = createBrowserRouter([
         path: 'reporteLAFT',
         element: <Suspense fallback={<Loading />}><ReportLaft /></Suspense>
       },
+      {
+        path: 'reportOracle',
+        element: <Suspense fallback={<Loading />}><ReportOracle /></Suspense>
+      }
       /*
       {
         path: 'dashboard',
         element: <Suspense fallback={<Loading />}><Dashboard /></Suspense>
       },
-      {
-        path: 'reportOracle',
-        element: <Suspense fallback={<Loading />}><ResportOracle /></Suspense>
-      }
       */
     ]
   }
