@@ -6,15 +6,16 @@ import Loading from '@/components/loading'
 
 const ClienteNuevosPage = lazy(() => import('@/pages/ClientesNuevos'));
 const SeleccionReportes = lazy(() => import('@/pages/SeleccionReportes'));
-const ReportClienteGanadores = lazy(() => import('@/pages/ReporteClientGan'));
 const ClienteTodosPage = lazy(() => import('@/pages/ClientesTodos'));
 const EditarClientePage = lazy(() => import('@/pages/EditarCliente'));
-const ReporteBaloto = lazy(() => import('@/pages/ReporteBaloto'));
-const Dashboard = lazy(() => import('@/pages/Dashboard'));
-const ReportCobrados = lazy(() => import('@/pages/ReportCobrados'));
-const ReportMayores = lazy(() => import('@/pages/ReportMayores'));
-const ReportLaft = lazy(() => import('@/pages/ReportLaft'));
-const ResportOracle = lazy(() => import('@/pages/ReporteOracle'));
+const ReporteBaloto = lazy(() => import('@/pages/reports/baloto'));
+
+// const ReportClienteGanadores = lazy(() => import('@/pages/ReporteClientGan'));
+// const Dashboard = lazy(() => import('@/pages/Dashboard'));
+// const ReportCobrados = lazy(() => import('@/pages/ReportCobrados'));
+// const ReportMayores = lazy(() => import('@/pages/ReportMayores'));
+// const ReportLaft = lazy(() => import('@/pages/ReportLaft'));
+// const ResportOracle = lazy(() => import('@/pages/ReporteOracle'));
 
 
 export const BrowserRouter = createBrowserRouter([
@@ -39,14 +40,14 @@ export const BrowserRouter = createBrowserRouter([
         path: 'editar-cliente/:id',
         element: <Suspense fallback={<Loading />}><EditarClientePage /></Suspense>
       },
+      {
+        path: 'reportBaloto',
+        element: <Suspense fallback={<Loading />}><ReporteBaloto /></Suspense>
+      },
       /*
       {
         path: 'dashboard',
         element: <Suspense fallback={<Loading />}><Dashboard /></Suspense>
-      },
-      {
-        path: 'reportBaloto',
-        element: <Suspense fallback={<Loading />}><ReporteBaloto /></Suspense>
       },
       {
         path: 'reportClientGanadores',

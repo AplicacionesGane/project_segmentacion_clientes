@@ -108,7 +108,7 @@ export default function SeleccionReportes() {
                 <div className="mt-auto">
                   <button
                     onClick={() => navigate(report.route)}
-                    className={`w-full bg-gradient-to-r ${report.gradient} text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 group-hover:shadow-2xl`}
+                    className={`w-full bg-gradient-to-r ${report.gradient} text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 group-hover:shadow-2xl cursor-pointer`}
                   >
                     <span>Acceder al Reporte</span>
                     <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
