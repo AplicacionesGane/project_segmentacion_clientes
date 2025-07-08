@@ -21,8 +21,8 @@ export default function Dashboard() {
     setLoading(true)
     try {
       const [response1, response2] = await Promise.all([
-        axios.get<CompanyData[]>(`${URL_API_DATA}/getInfo?fecha=${date?.toString()}`),
-        axios.get<CompanyData2>(`${URL_API_DATA}/getInfo2?fecha=${date?.toString()}`)
+        axios.get<CompanyData[]>(`${URL_API_DATA}/getInfo?fecha=${date?.toISOString()}`),
+        axios.get<CompanyData2>(`${URL_API_DATA}/getInfo2?fecha=${date?.toISOString()}`),
       ])
 
       setChartData1(response1.data)
