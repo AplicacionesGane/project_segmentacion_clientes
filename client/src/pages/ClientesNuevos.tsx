@@ -60,16 +60,14 @@ function ClientesNuevos() {
 
   return (
     <section className='h-screen flex flex-col bg-gray-50'>
-
-      <section className='flex py-2 justify-around'>
-        <HeaderPagesClientes
-          totalClients={totalClients}
-          search={search}
-          setSearch={setSearch}
-          setPageSize={setPageSize}
-          title='Clientes Nuevos'
-        />
-      </section>
+      
+      <HeaderPagesClientes
+        totalClients={totalClients}
+        search={search}
+        setSearch={setSearch}
+        setPageSize={setPageSize}
+        title='Clientes Nuevos'
+      />
 
       {/* ...existing code... */}
       <section className='flex-1 overflow-y-auto'>

@@ -1,13 +1,15 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/Select';
-import { Categorizacion, TipoZona } from '../utils/contanst'
-import { useEditClient } from '../hooks/useEditClient';
-import { URL_API_DATA } from '../utils/contanst';
+import { User, FileText, MapPin, Phone, Mail, Calendar, Home, Shield, Save, AlertCircle } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Categorizacion, TipoZona, URL_API_DATA } from '@/utils/contanst'
+import { useEditClient } from '@/hooks/useEditClient';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 import { useParams } from 'react-router';
-import { Input } from '../components/Input';
-import { Label } from '../components/Label';
 import { toast } from 'sonner';
-import axios from 'axios';
 import { useRef } from 'react';
+import axios from 'axios';
 
 function EditarCliente() {
   const { id } = useParams<{ id: string }>();
@@ -39,105 +41,277 @@ function EditarCliente() {
       });
   }
 
-  return (
-    <>
-      {
-        cliente ? (
-          <section className='p-4'>
-            <h1 className='text-2xl font-bold text-center pb-2'>Editar cliente</h1>
-            <form ref={formRef} className='grid grid-cols-3 gap-4 max-w-[1200px] m-auto' onSubmit={handleSubmit}>
-              <div>
-                <Label>Nombres</Label>
-                <Input name='nombres' defaultValue={cliente.NOMBRES} readOnly />
-              </div>
-              <div>
-                <Label>Documento</Label>
-                <Input name='documento' defaultValue={cliente.DOCUMENTO} readOnly />
-              </div>
-              <div>
-                <Label>Tipo de documento</Label>
-                <Input name='tipodocumento' defaultValue={cliente.TIPODOCUMENTO} readOnly />
-              </div>
-              <div>
-                <Label>Fecha de nacimiento</Label>
-                <Input name='fechanacimiento' defaultValue={cliente.FECHANACIMIENTO.toString()} readOnly />
-              </div>
-              <div>
-                <Label>Dirección</Label>
-                <Input name='direccion' defaultValue={cliente.DIRECCION} readOnly />
-              </div>
-              <div>
-                <Label>Correo</Label>
-                <Input name='nombres' defaultValue={cliente.EMAIL} readOnly />
-              </div>
-              <div>
-                <Label>Telefono 1</Label>
-                <Input name='telefono1' defaultValue={cliente.TELEFONO1} readOnly />
-              </div>
-              <div>
-                <Label>Telefono 2</Label>
-                <Input name='telefono2' defaultValue={cliente.TELEFONO2 || ''} readOnly />
-              </div>
-              <div>
-                <Label>PEP</Label>
-                <Input name='pep' defaultValue={cliente.PEP} readOnly />
-              </div>
-              <div>
-                <Label>Categoria</Label>
-                {/* <Input name='categoria' defaultValue={cliente.CATEGORIA} /> */}
-                <Select defaultValue={'null'} name='categoria'>
-                  <SelectTrigger className='mx-auto'>
-                    <SelectValue placeholder='Select' />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {Categorizacion.map((item, index) => (
-                      <SelectItem key={index} value={item.value || 'ninguno'}>
-                        <span className='flex justify-between gap-x-2'>
-                          {item.label}
-                        </span>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Label>Tipo de zona</Label>
-                {/* <Input name='tipozona' defaultValue={cliente.TIPOZONA} /> */}
-                <Select defaultValue={'null'} name='tipozona'>
-                  <SelectTrigger className='mx-auto'>
-                    <SelectValue placeholder='Select' />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {TipoZona.map((item, index) => (
-                      <SelectItem key={index} value={item.value || 'ninguno'}>
-                        <span className='flex justify-between gap-x-2'>
-                          {/* <item.icon className='size-4 shrink-0 text-gray-500 dark:text-gray-500' aria-hidden='true' /> */}
-                          {item.label}
-                        </span>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Label>Fecha de carga</Label>
-                <Input name='fechacarga' defaultValue={cliente.FECHACARGA.toString()} readOnly />
-              </div>
+  if (!cliente) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <Card className="w-full max-w-md">
+          <CardContent className="flex flex-col items-center justify-center py-12">
+            <AlertCircle size={48} className="text-red-500 mb-4" />
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Cliente no encontrado</h3>
+            <p className="text-gray-600 text-center">No se pudo encontrar el cliente solicitado. Verifique el ID e intente nuevamente.</p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
-              <div className='col-span-1'>
-                <button type='submit' className='w-full bg-blue-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded'>
-                  Guardar
-                </button>
-              </div>
-            </form>
-          </section>
-        ) : (
-          <div>
-            No se encontro cliente
+  return (
+    <div className="h-screen bg-gray-50 py-8 overflow-y-auto">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Header */}
+        <div className="mb-2">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
+              <User size={24} className="text-white" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Editar Cliente</h1>
+              <p className="text-gray-600">Actualiza la información del cliente seleccionado</p>
+            </div>
           </div>
-        )
-      }
-    </>
+        </div>
+
+        <form ref={formRef} onSubmit={handleSubmit} className="space-y-2">
+
+          {/* Información Personal */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <User size={20} />
+                Información Personal
+              </CardTitle>
+              <CardDescription>
+                Datos básicos del cliente (solo lectura)
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="nombres" className="flex items-center gap-2">
+                    <User size={16} />
+                    Nombres
+                  </Label>
+                  <Input
+                    id="nombres"
+                    name="nombres"
+                    defaultValue={cliente.NOMBRES}
+                    readOnly
+                    className="bg-gray-50"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="documento" className="flex items-center gap-2">
+                    <FileText size={16} />
+                    Documento
+                  </Label>
+                  <Input
+                    id="documento"
+                    name="documento"
+                    defaultValue={cliente.DOCUMENTO}
+                    readOnly
+                    className="bg-gray-50"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="tipodocumento" className="flex items-center gap-2">
+                    <FileText size={16} />
+                    Tipo de documento
+                  </Label>
+                  <Input
+                    id="tipodocumento"
+                    name="tipodocumento"
+                    defaultValue={cliente.TIPODOCUMENTO}
+                    readOnly
+                    className="bg-gray-50"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="fechanacimiento" className="flex items-center gap-2">
+                    <Calendar size={16} />
+                    Fecha de nacimiento
+                  </Label>
+                  <Input
+                    id="fechanacimiento"
+                    name="fechanacimiento"
+                    defaultValue={cliente.FECHANACIMIENTO.toString()}
+                    readOnly
+                    className="bg-gray-50"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="pep" className="flex items-center gap-2">
+                    <Shield size={16} />
+                    PEP
+                  </Label>
+                  <Input
+                    id="pep"
+                    name="pep"
+                    defaultValue={cliente.PEP}
+                    readOnly
+                    className="bg-gray-50"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="fechacarga" className="flex items-center gap-2">
+                    <Calendar size={16} />
+                    Fecha de carga
+                  </Label>
+                  <Input
+                    id="fechacarga"
+                    name="fechacarga"
+                    defaultValue={cliente.FECHACARGA.toString()}
+                    readOnly
+                    className="bg-gray-50"
+                  />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Información de Contacto */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Phone size={20} />
+                Información de Contacto
+              </CardTitle>
+              <CardDescription>
+                Datos de contacto del cliente (solo lectura)
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="direccion" className="flex items-center gap-2">
+                    <Home size={16} />
+                    Dirección
+                  </Label>
+                  <Input
+                    id="direccion"
+                    name="direccion"
+                    defaultValue={cliente.DIRECCION}
+                    readOnly
+                    className="bg-gray-50"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="flex items-center gap-2">
+                    <Mail size={16} />
+                    Correo
+                  </Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    defaultValue={cliente.EMAIL}
+                    readOnly
+                    className="bg-gray-50"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="telefono1" className="flex items-center gap-2">
+                    <Phone size={16} />
+                    Teléfono 1
+                  </Label>
+                  <Input
+                    id="telefono1"
+                    name="telefono1"
+                    defaultValue={cliente.TELEFONO1}
+                    readOnly
+                    className="bg-gray-50"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="telefono2" className="flex items-center gap-2">
+                    <Phone size={16} />
+                    Teléfono 2
+                  </Label>
+                  <Input
+                    id="telefono2"
+                    name="telefono2"
+                    defaultValue={cliente.TELEFONO2 || ''}
+                    readOnly
+                    className="bg-gray-50"
+                  />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Información Editable */}
+          <Card className="border-blue-200">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-blue-700">
+                <MapPin size={20} />
+                Información Editable
+              </CardTitle>
+              <CardDescription>
+                Campos que pueden ser modificados
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="categoria" className="flex items-center gap-2 font-medium">
+                    <User size={16} />
+                    Categoría *
+                  </Label>
+                  <Select defaultValue="null" name="categoria">
+                    <SelectTrigger id="categoria" className="w-full">
+                      <SelectValue placeholder="Seleccione una categoría" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Categorizacion.map((item, index) => (
+                        <SelectItem key={index} value={item.value || 'ninguno'}>
+                          {item.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="tipozona" className="flex items-center gap-2 font-medium">
+                    <MapPin size={16} />
+                    Tipo de zona *
+                  </Label>
+                  <Select defaultValue="null" name="tipozona">
+                    <SelectTrigger id="tipozona" className="w-full">
+                      <SelectValue placeholder="Seleccione tipo de zona" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {TipoZona.map((item, index) => (
+                        <SelectItem key={index} value={item.value || 'ninguno'}>
+                          {item.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </CardContent>
+
+            <div className="flex justify-end pr-4">
+              <Button
+                type="submit"
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-2 font-semibold shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer"
+              >
+                <Save size={16} className="" />
+                Guardar Cambios
+              </Button>
+            </div>
+          </Card>
+        </form>
+      </div>
+    </div>
   )
 }
 
