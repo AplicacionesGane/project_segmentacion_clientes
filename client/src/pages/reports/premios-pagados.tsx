@@ -1,16 +1,16 @@
+import { DollarSign, Search, Calendar, Hash, User, MapPin, Building, Clock, CreditCard, FileText } from 'lucide-react';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { BottonExporOracleReport } from '@/components/ExportOracle';
+import { formatPrice, municipioString } from '@/utils/funtions';
 import { HeaderReports } from './components/header-reports';
 import { ReportOracleInterface } from '@/types/Interfaces';
 import { Card, CardContent } from '@/components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import Loading from '@/components/ui/LoadingComp';
+import { URL_API_DATA } from '@/utils/contanst';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import Loading from '@/components/ui/LoadingComp';
-import { formatPrice, municipioString } from '@/utils/funtions';
-import { URL_API_DATA } from '@/utils/contanst';
 import { FormEvent, useState } from 'react';
-import { DollarSign, Search, Calendar, Hash, User, MapPin, Building, Clock, CreditCard, FileText } from 'lucide-react';
 import axios from 'axios';
 
 export default function ReportOracle() {
@@ -67,12 +67,12 @@ export default function ReportOracle() {
         <BottonExporOracleReport datos={filteredData} />
       </HeaderReports>
 
-      <div>
+      <div className='px-2'>
         {data.length > 0 ? (
           <div className="space-y-4">
             {/* Filtros y estadísticas */}
-            <Card className="shadow-sm border-gray-200">
-              <CardContent className="p-4">
+            <Card className="px-2 py-4 shadow-sm border-gray-200">
+              <CardContent className="px-2">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="flex-1 max-w-md">
                     <Label htmlFor="search" className="text-sm font-medium text-gray-700 flex items-center gap-2 mb-2">

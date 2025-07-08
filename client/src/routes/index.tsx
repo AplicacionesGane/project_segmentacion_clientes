@@ -14,9 +14,7 @@ const ReportCobrados = lazy(() => import('@/pages/reports/cobrados-colocador'));
 const ReportMayores = lazy(() => import('@/pages/reports/mayores-15uvt'));
 const ReportLaft = lazy(() => import('@/pages/reports/report-laft'));
 const ReportOracle = lazy(() => import('@/pages/reports/premios-pagados'));
-
-// const Dashboard = lazy(() => import('@/pages/Dashboard'));
-
+const Dashboard = lazy(() => import('@/pages/Dashboard'));
 
 export const BrowserRouter = createBrowserRouter([
   {
@@ -63,13 +61,11 @@ export const BrowserRouter = createBrowserRouter([
       {
         path: 'reportOracle',
         element: <Suspense fallback={<Loading />}><ReportOracle /></Suspense>
-      }
-      /*
+      },
       {
         path: 'dashboard',
         element: <Suspense fallback={<Loading />}><Dashboard /></Suspense>
       },
-      */
     ]
   }
 ]);
