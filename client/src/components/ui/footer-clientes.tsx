@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 interface PropsFooter {
   page: number;
   totalPages: number;
-  setPage: React.Dispatch<React.SetStateAction<number>>
+  setPage: (newPage: number) => void
 }
 
 export const RenderFooterClients = ({ page, totalPages, setPage }: PropsFooter) => {
@@ -12,7 +12,7 @@ export const RenderFooterClients = ({ page, totalPages, setPage }: PropsFooter) 
       {/* Previous Button */}
       <button 
         disabled={page === 1} 
-        onClick={() => setPage((prev) => prev - 1)}
+        onClick={() => setPage(page - 1)}
         className={`
           flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 mx-2 cursor-pointer
           ${page === 1 
@@ -37,7 +37,7 @@ export const RenderFooterClients = ({ page, totalPages, setPage }: PropsFooter) 
       {/* Next Button */}
       <button 
         disabled={page === totalPages} 
-        onClick={() => setPage((prev) => prev + 1)}
+        onClick={() => setPage(page + 1)}
         className={`
           flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 mx-2 cursor-pointer
           ${page === totalPages 

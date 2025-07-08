@@ -4,12 +4,12 @@ import { Search, Users } from 'lucide-react';
 interface PropsHeader {
   totalClients: number;
   search: string;
-  setSearch: React.Dispatch<React.SetStateAction<string>>;
-  setPageSize: React.Dispatch<React.SetStateAction<number>>;
+  handleSearch: (value: string) => void;
+  handlePageSizeChange: (number: number) => void;
   title?: string;
 }
 
-export function HeaderPagesClientes({ totalClients, search, setSearch, setPageSize, title }: PropsHeader) {
+export function HeaderPagesClientes({ totalClients, search, handleSearch, handlePageSizeChange, title }: PropsHeader) {
   return (
     <header className='bg-white border-b border-gray-200 shadow-sm'>
       <div className='px-6 py-4'>
@@ -48,7 +48,7 @@ export function HeaderPagesClientes({ totalClients, search, setSearch, setPageSi
                   type='text'
                   value={search}
                   placeholder='N° Documento'
-                  onChange={(ev) => setSearch(ev.target.value)}
+                  onChange={(ev) => handleSearch?.(ev.target.value)}
                   className='w-[220px] pl-10 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white hover:border-gray-300'
                 />
               </div>
@@ -57,7 +57,7 @@ export function HeaderPagesClientes({ totalClients, search, setSearch, setPageSi
             {/* Page Size Selector */}
             <div className='flex items-center gap-2'>
               <label className='text-sm font-medium text-gray-700 whitespace-nowrap'>Mostrar:</label>
-              <SelectCantidadClientes setPageSize={setPageSize} />
+              <SelectCantidadClientes funtionHandle={handlePageSizeChange} />
             </div>
           </div>
         </div>
