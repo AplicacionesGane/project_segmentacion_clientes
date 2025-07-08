@@ -2,6 +2,7 @@ import { ReportOracleInterface } from '../types/Interfaces'
 import { utils, ColInfo, writeFile } from 'xlsx'
 import { toast } from 'sonner'
 import { municipioString } from '../utils/funtions'
+import { Button } from './ui/button'
 
 const generateExcelData = (datos: ReportOracleInterface[]): unknown[] => {
   const titulo = [{ A: 'Reporte Premios Pagados en PDV (CP2) Oracle' }]
@@ -75,8 +76,11 @@ export const BottonExporOracleReport = ({ datos }: { datos: ReportOracleInterfac
   }
 
   return (
-    <button onClick={handleDownload} className='bg-yellow-300 hover:bg-yellow-400  p-2 rounded-md text-black'>
+    <Button
+      onClick={handleDownload}
+      className='bg-yellow-300 hover:bg-yellow-400 px-4 py-2 rounded-md text-black cursor-pointer shadow-md hover:shadow-lg transition-all duration-200'
+    >
       Exportar a Excel
-    </button>
+    </Button>
   )
 }

@@ -1,4 +1,4 @@
-import { URL_API_LOGIN } from '../utils/contanst';
+import { URL_API_LOGIN } from '@/utils/contanst';
 import axios from 'axios';
 
 export const LogoutAndDeleteToken = async () => {

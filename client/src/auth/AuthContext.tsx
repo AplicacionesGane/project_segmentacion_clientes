@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState, Dispatch, ReactNode, SetStateAction } from 'react'
-import { URL_API_LOGIN } from '../utils/contanst'
-import { LogoutAndDeleteToken } from '../services/LogOut'
-import { type User } from '../types/Interfaces'
+import { LogoutAndDeleteToken } from '@/services/LogOut'
+import { URL_API_LOGIN } from '@/utils/contanst'
+import { type User } from '@/types/Interfaces'
 import axios from 'axios'
 
 interface IAuthContext {
