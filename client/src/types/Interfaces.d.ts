@@ -128,3 +128,24 @@ export interface ReportOracleInterface {
   nombrecliente: string;
   municipio: number;
 }
+
+export interface CompanyData {
+  empresa: string
+  data: ChartData[]
+}
+
+export interface ChartData {
+  id: number;
+  label: string;
+  value: number;
+}
+
+export interface PremioI {
+  TIPOPREMIO: string;
+  CANT: number;
+}
+
+export interface CompanyData2 {
+  Multired: PremioI[];
+  Servired: PremioI[];
+}
