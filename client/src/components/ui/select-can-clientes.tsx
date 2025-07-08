@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/select';
 import { Database } from 'lucide-react';
 
-export function SelectCantidadClientes({ setPageSize }: { setPageSize: React.Dispatch<React.SetStateAction<number>> }) {
+export function SelectCantidadClientes({ funtionHandle }: { funtionHandle: (value: number) => void }) {
   const options = [
     { value: '20', label: '20 registros' },
     { value: '50', label: '50 registros' },
@@ -17,7 +17,7 @@ export function SelectCantidadClientes({ setPageSize }: { setPageSize: React.Dis
   ]
 
   return (
-    <Select defaultValue='100' onValueChange={(value) => setPageSize(Number(value))}>
+    <Select defaultValue='100' onValueChange={(value) => funtionHandle(Number(value))}>
       <SelectTrigger className='w-[180px]'>
         <SelectValue placeholder='100 registros' />
       </SelectTrigger>

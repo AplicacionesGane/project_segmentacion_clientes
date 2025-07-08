@@ -4,16 +4,25 @@ import { RenderClients } from '@/components/ui/render-clients-list';
 import { useClientes } from '@/hooks/useClientes';
 
 function ClientesNuevos() {
-  const { clients, page, setPage, setPageSize, totalClients, totalPages, search, setSearch } = useClientes({ url: 'clientesNuevos' });
+  const {
+    clients,
+    page,
+    setPage,
+    setPageSize,
+    totalClients,
+    totalPages,
+    search,
+    setSearch
+  } = useClientes({ url: 'clientesNuevos' });
 
   return (
     <section className='h-screen flex flex-col bg-gray-50'>
-      
+
       <HeaderPagesClientes
         totalClients={totalClients}
         search={search}
-        setSearch={setSearch}
-        setPageSize={setPageSize}
+        handleSearch={setSearch}
+        handlePageSizeChange={setPageSize}
         title='Clientes Nuevos'
       />
 
@@ -21,7 +30,11 @@ function ClientesNuevos() {
         <RenderClients clientes={clients} />
       </section>
 
-      <RenderFooterClients page={page} totalPages={totalPages} setPage={setPage} />
+      <RenderFooterClients
+        page={page}
+        totalPages={totalPages}
+        setPage={setPage}
+      />
     </section>
   )
 }
