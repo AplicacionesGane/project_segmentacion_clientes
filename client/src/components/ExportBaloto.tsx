@@ -1,6 +1,7 @@
-import { ReportDataBaloto } from '../types/Interfaces'
-import { utils, ColInfo, writeFile } from 'xlsx'
-import { toast } from 'sonner'
+import { ReportDataBaloto } from '../types/Interfaces';
+import { utils, ColInfo, writeFile } from 'xlsx';
+import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 const generateExcelData = (datos: ReportDataBaloto[]): unknown[] => {
   const titulo = [{ A: 'Reporte Premios Pagados Baloto ' }]
@@ -70,8 +71,11 @@ export const BottonExporBaloto = ({ datos }: { datos: ReportDataBaloto[] }): JSX
   }
 
   return (
-    <button onClick={handleDownload} className='bg-yellow-300 hover:bg-yellow-400  p-2 rounded-md text-black'>
+    <Button
+      onClick={handleDownload}
+      className='bg-yellow-300 hover:bg-yellow-400 px-4 py-2 rounded-md text-black cursor-pointer shadow-md hover:shadow-lg transition-all duration-200'
+    >
       Exportar a Excel
-    </button>
+    </Button>
   )
 }

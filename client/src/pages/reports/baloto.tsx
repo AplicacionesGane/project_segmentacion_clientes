@@ -1,6 +1,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { FileText, Hash, DollarSign, Calculator, User, Calendar, Building2 } from 'lucide-react';
 import { HeaderReports } from '@/pages/reports/components/header-reports';
+import { BottonExporBaloto } from '@/components/ExportBaloto';
 import { Card, CardContent } from '@/components/ui/card';
 import { ReportDataBaloto } from '@/types/Interfaces';
 import Loading from '@/components/ui/LoadingComp';
@@ -67,13 +68,15 @@ export default function ReporteBaloto() {
         setDate2={setDate2}
         setZona={setZona}
         zona={zona}
-      />
+      >
+        <BottonExporBaloto datos={data} />
+      </HeaderReports>
 
-      <div className='h-[90vh] overflow-y-auto px-2 '>
+      <div className='px-2'>
         {data.length > 0 ? (
-          <Card className="mx-2 shadow-sm border-gray-200">
+          <Card className="shadow-sm border-gray-200">
             <CardContent className="p-0">
-              <div className=''>
+              <div className='h-[84vh] overflow-y-auto'>
                 <Table>
                   <TableHeader className="sticky top-0 bg-white z-10">
                     <TableRow className="bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100">
