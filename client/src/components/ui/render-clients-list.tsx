@@ -7,9 +7,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { Cliente } from '../../types/Interfaces';
+import { Cliente } from '@/types/Interfaces';
 import { useNavigate } from 'react-router';
 import { Edit, Mail, Phone, User, FileText, MapPin } from 'lucide-react';
+import { Button } from "./button";
 
 export const RenderClients = ({ clientes } : { clientes: Cliente[] }) => {
   const navigate = useNavigate();
@@ -126,13 +127,14 @@ export const RenderClients = ({ clientes } : { clientes: Cliente[] }) => {
                 </div>
               </TableCell>
               <TableCell className="text-center">
-                <button 
+                <Button 
+                  className="cursor-pointer bg-blue-50 hover:bg-blue-100 text-blue-600 font-semibold px-4 py-2 rounded-lg transition-colors duration-200"
                   onClick={() => navigate(`/editar-cliente/${item.DOCUMENTO}`)} 
-                  className="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-blue-700 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 hover:border-blue-300 transition-all duration-200 hover:shadow-sm"
+                  variant={"outline"}
                 >
                   <Edit size={14} />
                   Editar
-                </button>
+                </Button>
               </TableCell>
             </TableRow>
           ))}

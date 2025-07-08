@@ -14,7 +14,7 @@ export const RenderFooterClients = ({ page, totalPages, setPage }: PropsFooter) 
         disabled={page === 1} 
         onClick={() => setPage((prev) => prev - 1)}
         className={`
-          flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200
+          flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 mx-2 cursor-pointer
           ${page === 1 
             ? 'text-gray-400 bg-gray-50 cursor-not-allowed' 
             : 'text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm'
@@ -39,7 +39,7 @@ export const RenderFooterClients = ({ page, totalPages, setPage }: PropsFooter) 
         disabled={page === totalPages} 
         onClick={() => setPage((prev) => prev + 1)}
         className={`
-          flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200
+          flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 mx-2 cursor-pointer
           ${page === totalPages 
             ? 'text-gray-400 bg-gray-50 cursor-not-allowed' 
             : 'text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm'

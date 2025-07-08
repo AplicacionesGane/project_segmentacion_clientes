@@ -1,6 +1,6 @@
-import { RenderFooterClients } from '@/components/ui/RenderFooterClients';
+import { RenderFooterClients } from '@/components/ui/footer-clientes';
 import { HeaderPagesClientes } from '@/components/ui/header-pages-clientes';
-import { RenderClients } from '@/components/ui/RenderClients';
+import { RenderClients } from '@/components/ui/render-clients-list';
 import { useClientes } from '@/hooks/useClientes';
 
 function ClientesTodos() {

@@ -1,7 +1,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from '../components/Table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/Select';
 import { SelectCantidadClientes } from '../components/ui/select-can-clientes';
-import { RenderFooterClients } from '../components/ui/RenderFooterClients';
+import { RenderFooterClients } from '../components/ui/footer-clientes';
 import { Categorizacion, TipoZona, URL_API_DATA } from '../utils/contanst';
 
 import { useClientes } from '../hooks/useClientes';
@@ -11,7 +11,7 @@ import { useState, useRef } from 'react';
 import { toast } from 'sonner';
 import axios from 'axios';
 import { HeaderPagesClientes } from '@/components/ui/header-pages-clientes';
-import { RenderClients } from '@/components/ui/RenderClients';
+import { RenderClients } from '@/components/ui/render-clients-list';
 
 function ClientesNuevos() {
   const { clients, page, setPage, setPageSize, setReload, totalClients, totalPages, search, setSearch, reload } = useClientes({ url: 'clientesNuevos' });
