@@ -84,7 +84,7 @@ export const HeaderReports = ({ cantDates, date1, date2, handleSubmit, setDate1,
 
             <Button 
               type="submit" 
-              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-200 w-full sm:w-auto"
+              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-200 w-full sm:w-auto cursor-pointer"
             >
               <FileText size={16} className="mr-2" />
               Buscar Información
