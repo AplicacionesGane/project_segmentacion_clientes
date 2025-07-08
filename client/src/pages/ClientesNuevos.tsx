@@ -1,7 +1,7 @@
 import { HeaderPagesClientes } from '@/components/ui/header-pages-clientes';
-import { RenderFooterClients } from '../components/ui/footer-clientes';
+import { RenderFooterClients } from '@/components/ui/footer-clientes';
 import { RenderClients } from '@/components/ui/render-clients-list';
-import { useClientes } from '../hooks/useClientes';
+import { useClientes } from '@/hooks/useClientes';
 
 function ClientesNuevos() {
   const { clients, page, setPage, setPageSize, totalClients, totalPages, search, setSearch } = useClientes({ url: 'clientesNuevos' });

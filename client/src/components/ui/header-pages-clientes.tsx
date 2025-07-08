@@ -1,5 +1,5 @@
-import { SelectCantidadClientes } from "./select-can-clientes";
-import { Search, Users } from "lucide-react";
+import { SelectCantidadClientes } from './select-can-clientes';
+import { Search, Users } from 'lucide-react';
 
 interface PropsHeader {
   totalClients: number;

@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router';
 import { lazy, Suspense } from 'react';
 import Root from './Root';
 
-import Loading from '@/components/loading'
+import Loading from '@/components/ui/LoadingComp';
 
 const ClienteNuevosPage = lazy(() => import('@/pages/ClientesNuevos'));
 const SeleccionReportes = lazy(() => import('@/pages/SeleccionReportes'));

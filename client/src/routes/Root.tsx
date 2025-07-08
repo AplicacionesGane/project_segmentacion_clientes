@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 
 import { useAuth } from '../auth/AuthContext';
-import Loading from '@/components/loading'
+import Loading from '@/components/ui/LoadingComp';
 import Layout from './layout';
 
 const LoginPage = lazy(() => import('../pages/LoginPage'));

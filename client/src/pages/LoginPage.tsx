@@ -1,9 +1,9 @@
-import { URL_API_LOGIN } from '../utils/contanst'
-import { Button } from '../components/ui/button'
-import { useAuth } from '../auth/AuthContext'
-import { FormEvent, useState } from 'react'
-import { toast, Toaster } from 'sonner'
-import axios from 'axios'
+import { URL_API_LOGIN } from '@/utils/contanst';
+import { Button } from '@/components/ui/button';
+import { useAuth } from '@/auth/AuthContext';
+import { FormEvent, useState } from 'react';
+import { toast, Toaster } from 'sonner';
+import axios from 'axios';
 
 function LoginPage() {
   const { setIsAuthenticated } = useAuth()
@@ -42,22 +42,17 @@ function LoginPage() {
     <section className='min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100'>
 
       <div className='flex flex-col items-center justify-center px-6 py-8 mx-auto min-h-screen'>
-
         <div className='w-full max-w-md'>
-
           <div className='bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden'>
-
             <div className='h-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600'></div>
-            
             <div className='px-8 py-10'>
-
               <div className='text-center mb-8'>
                 <figure className='flex justify-center mb-6'>
                   <div className='p-3 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl shadow-sm'>
                     <img width={160} src='/gane.webp' alt='logo' className='drop-shadow-sm' />
                   </div>
                 </figure>
-                
+
                 <h1 className='text-2xl font-bold text-gray-800 mb-2'>
                   Segmentación Clientes
                 </h1>
@@ -77,13 +72,13 @@ function LoginPage() {
                         <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' />
                       </svg>
                     </div>
-                    <input 
+                    <input
                       className='w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white focus:bg-white'
-                      onChange={ev => setUsername(ev.target.value)} 
-                      type='text' 
-                      placeholder='CP1118******' 
-                      required 
-                      value={username} 
+                      onChange={ev => setUsername(ev.target.value)}
+                      type='text'
+                      placeholder='CP1118******'
+                      required
+                      value={username}
                     />
                   </div>
                 </div>
@@ -98,13 +93,13 @@ function LoginPage() {
                         <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z' />
                       </svg>
                     </div>
-                    <input 
+                    <input
                       className='w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white focus:bg-white'
-                      onChange={ev => setPassword(ev.target.value)} 
-                      type='password' 
-                      placeholder='••••••••' 
-                      required 
-                      value={password} 
+                      onChange={ev => setPassword(ev.target.value)}
+                      type='password'
+                      placeholder='••••••••'
+                      required
+                      value={password}
                     />
                   </div>
                 </div>
@@ -138,7 +133,7 @@ function LoginPage() {
               </form>
             </div>
           </div>
-          
+
           <div className='text-center mt-8'>
             <p className='text-sm text-gray-500'>
               © {new Date().getFullYear()} Sistema de Segmentación de Clientes

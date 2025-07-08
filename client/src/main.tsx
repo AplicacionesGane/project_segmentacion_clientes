@@ -1,7 +1,7 @@
-import { AuthProvider } from './auth/AuthContext';
+import { AuthProvider } from '@/auth/AuthContext';
 import { RouterProvider } from 'react-router';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from './routes';
+import { BrowserRouter } from '@/routes';
 import axios from 'axios';
 
 axios.defaults.withCredentials = true

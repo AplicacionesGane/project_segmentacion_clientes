@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface PropsFooter {
   page: number;
@@ -26,9 +26,9 @@ export const RenderFooterClients = ({ page, totalPages, setPage }: PropsFooter) 
       </button>
 
       {/* Page Indicator */}
-      <div className="flex items-center gap-2">
-        <div className="flex items-center gap-1 px-3 py-2 bg-blue-50 border border-blue-200 rounded-lg">
-          <span className="text-sm font-medium text-blue-700">
+      <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1 px-3 py-2 bg-blue-50 border border-blue-200 rounded-lg'>
+          <span className='text-sm font-medium text-blue-700'>
             Página {page} de {totalPages}
           </span>
         </div>
