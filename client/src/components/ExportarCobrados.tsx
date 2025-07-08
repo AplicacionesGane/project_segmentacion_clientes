@@ -1,6 +1,7 @@
 import { ReportPremios } from '../types/Interfaces'
 import { utils, ColInfo, writeFile } from 'xlsx'
 import { toast } from 'sonner'
+import { Button } from './ui/button'
 
 const generateExcelData = (datos: ReportPremios[]): unknown[] => {
   const titulo = [{ A: 'Reporte Premios Pagados Por Colocadores' }]
@@ -76,8 +77,11 @@ export const BottonExporPremios = ({ datos }: { datos: ReportPremios[] }): JSX.E
   }
 
   return (
-    <button onClick={handleDownload} className='bg-green-300 hover:bg-green-400  p-2 rounded-md text-black'>
+    <Button
+      onClick={handleDownload}
+      className='bg-yellow-300 hover:bg-yellow-400 px-4 py-2 rounded-md text-black cursor-pointer shadow-md hover:shadow-lg transition-all duration-200'
+    >
       Exportar a Excel
-    </button>
+    </Button>
   )
 }

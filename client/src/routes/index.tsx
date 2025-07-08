@@ -9,10 +9,10 @@ const SeleccionReportes = lazy(() => import('@/pages/SeleccionReportes'));
 const ClienteTodosPage = lazy(() => import('@/pages/ClientesTodos'));
 const EditarClientePage = lazy(() => import('@/pages/EditarCliente'));
 const ReporteBaloto = lazy(() => import('@/pages/reports/baloto'));
+const ReportClienteGanadores = lazy(() => import('@/pages/reports/clientes-mas-ganadores'));
+const ReportCobrados = lazy(() => import('@/pages/reports/cobrados-colocador'));
 
-// const ReportClienteGanadores = lazy(() => import('@/pages/ReporteClientGan'));
 // const Dashboard = lazy(() => import('@/pages/Dashboard'));
-// const ReportCobrados = lazy(() => import('@/pages/ReportCobrados'));
 // const ReportMayores = lazy(() => import('@/pages/ReportMayores'));
 // const ReportLaft = lazy(() => import('@/pages/ReportLaft'));
 // const ResportOracle = lazy(() => import('@/pages/ReporteOracle'));
@@ -44,11 +44,6 @@ export const BrowserRouter = createBrowserRouter([
         path: 'reportBaloto',
         element: <Suspense fallback={<Loading />}><ReporteBaloto /></Suspense>
       },
-      /*
-      {
-        path: 'dashboard',
-        element: <Suspense fallback={<Loading />}><Dashboard /></Suspense>
-      },
       {
         path: 'reportClientGanadores',
         element: <Suspense fallback={<Loading />}><ReportClienteGanadores /></Suspense>
@@ -56,6 +51,11 @@ export const BrowserRouter = createBrowserRouter([
       {
         path: 'reportCobrados',
         element: <Suspense fallback={<Loading />}><ReportCobrados /></Suspense>
+      },
+      /*
+      {
+        path: 'dashboard',
+        element: <Suspense fallback={<Loading />}><Dashboard /></Suspense>
       },
       {
         path: 'reportPremiosMayores',
