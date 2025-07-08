@@ -1,5 +1,5 @@
-import { RiArchiveStackFill, RiArticleFill, RiGroupLine, RiGuideFill, RiDatabaseLine } from "@remixicon/react";
 import { useNavigate } from "react-router";
+import { Archive, FileText, Users, UserCheck, Database } from "lucide-react";
 
 const reports = [
   {
@@ -14,7 +14,7 @@ const reports = [
     id: 'ganadores',
     title: 'Clientes Más Ganadores',
     description: 'Permite mediante el número de cédula, conocer los clientes que más han ganado en premios. Se debe seleccionar rango de fechas para la consulta.',
-    icon: <RiGroupLine size={56} className="text-white" />,
+    icon: <Users size={56} className="text-white" />,
     gradient: 'from-emerald-600 to-green-600',
     route: '/reportClientGanadores'
   },
@@ -22,7 +22,7 @@ const reports = [
     id: 'cobrados',
     title: 'Cobrados por Colocadores',
     description: 'Genera la información de los premios cobrados por colocadores. Se debe seleccionar rango de fechas para la consulta.',
-    icon: <RiGuideFill size={56} className="text-white" />,
+    icon: <UserCheck size={56} className="text-white" />,
     gradient: 'from-rose-600 to-pink-600',
     route: '/reportCobrados'
   },
@@ -30,7 +30,7 @@ const reports = [
     id: 'mayores',
     title: 'Premios Mayores 15UVT',
     description: 'Genera la información de los premios mayores 15UVT. Se debe seleccionar rango de fechas para la consulta.',
-    icon: <RiArticleFill size={56} className="text-white" />,
+    icon: <FileText size={56} className="text-white" />,
     gradient: 'from-indigo-600 to-purple-600',
     route: '/reportPremiosMayores'
   },
@@ -38,7 +38,7 @@ const reports = [
     id: 'laft',
     title: 'Reporte LAFT-FPADM',
     description: 'Genera la información de LAFT-FPADM. Se debe seleccionar rango de fechas para la consulta.',
-    icon: <RiArchiveStackFill size={56} className="text-white" />,
+    icon: <Archive size={56} className="text-white" />,
     gradient: 'from-orange-600 to-amber-600',
     route: '/ReporteLAFT'
   },
@@ -46,7 +46,7 @@ const reports = [
     id: 'oracle',
     title: 'Reporte Premios Pagados en PDV (CP2) Oracle',
     description: 'Genera la información de los premios pagados en PDV (CP2) Oracle. Se debe seleccionar rango de fechas para la consulta y empresa.',
-    icon: <RiDatabaseLine size={56} className="text-white" />,
+    icon: <Database size={56} className="text-white" />,
     gradient: 'from-violet-600 to-purple-600',
     route: '/reportOracle'
   }

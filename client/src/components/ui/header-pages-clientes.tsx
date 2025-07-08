@@ -6,9 +6,10 @@ interface PropsHeader {
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
   setPageSize: React.Dispatch<React.SetStateAction<number>>;
+  title?: string;
 }
 
-export function HeaderPagesClientes({ totalClients, search, setSearch, setPageSize }: PropsHeader) {
+export function HeaderPagesClientes({ totalClients, search, setSearch, setPageSize, title }: PropsHeader) {
   return (
     <header className='bg-white border-b border-gray-200 shadow-sm'>
       <div className='px-6 py-4'>
@@ -21,7 +22,9 @@ export function HeaderPagesClientes({ totalClients, search, setSearch, setPageSi
                 <Users size={20} className='text-white' />
               </div>
               <div>
-                <h1 className='text-xl font-bold text-gray-800'>Gestión de Clientes</h1>
+                <h1 className='text-xl font-bold text-gray-800'>
+                  {title || 'Gestión Clientes'}
+                </h1>
                 <p className='text-sm text-gray-500'>Administra y consulta la base de datos de clientes</p>
               </div>
             </div>

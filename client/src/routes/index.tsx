@@ -26,7 +26,11 @@ export const BrowserRouter = createBrowserRouter([
         index: true,
         element: <Suspense fallback={<Loading />}><ClienteTodosPage /></Suspense>
       },
-      /*
+      {
+        path: 'reportes',
+        element: <Suspense fallback={<Loading />}><SeleccionReportes /></Suspense>
+      },
+
       {
         path: 'clientes-nuevos',
         element: <Suspense fallback={<Loading />}><ClienteNuevosPage /></Suspense>
@@ -35,13 +39,10 @@ export const BrowserRouter = createBrowserRouter([
         path: 'editar-cliente/:id',
         element: <Suspense fallback={<Loading />}><EditarClientePage /></Suspense>
       },
+      /*
       {
         path: 'dashboard',
         element: <Suspense fallback={<Loading />}><Dashboard /></Suspense>
-      },
-      {
-        path: 'reportes',
-        element: <Suspense fallback={<Loading />}><SeleccionReportes /></Suspense>
       },
       {
         path: 'reportBaloto',
