@@ -8,6 +8,9 @@ const envSchema = z.object({
   DB_USER: z.string().min(1, 'Variable DB_USER is required'),
   DB_PASS: z.string().min(1, 'Variable DB_PASS is required'),
   DB_NAME: z.string().min(1, 'Variable DB_NAME is required'),
+  AUTH_API_DATOS_URL: z.string().min(1, 'Variable AUTH_API_DATOS_URL is required').url(),
+  AUTH_API_DATOS_USER: z.string().min(1, 'Variable AUTH_API_DATOS_USER is required'),
+  AUTH_API_DATOS_PASS: z.string().min(1, 'Variable AUTH_API_DATOS_PASS is required')
 })
 
 const { success, data, error } = envSchema.safeParse(process.env)
@@ -24,5 +27,8 @@ export const {
   DB_PORT,
   DB_USER,
   DB_PASS,
-  DB_NAME
+  DB_NAME,
+  AUTH_API_DATOS_URL,
+  AUTH_API_DATOS_USER,
+  AUTH_API_DATOS_PASS
 } = data
