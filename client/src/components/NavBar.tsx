@@ -1,4 +1,4 @@
-import { BarChart3, Users, UserPlus, FileText, LogOut, Menu } from 'lucide-react';
+import { BarChart3, Users, UserPlus, FileText, LogOut, Menu, DatabaseZapIcon } from 'lucide-react';
 import { LogoutAndDeleteToken } from '@/services/LogOut';
 import { useAuth } from '@/auth/AuthContext';
 import { NavLink } from 'react-router';
@@ -40,6 +40,12 @@ export default function NavBar() {
       to: 'reportes',
       icon: FileText,
       description: 'Informes y análisis'
+    },
+    {
+      title: 'Tus Datos',
+      to: 'tus-datos',
+      icon: DatabaseZapIcon,
+      description: 'Verificación de datos'
     }
   ];
 

@@ -15,6 +15,7 @@ const ReportMayores = lazy(() => import('@/pages/reports/mayores-15uvt'));
 const ReportLaft = lazy(() => import('@/pages/reports/report-laft'));
 const ReportOracle = lazy(() => import('@/pages/reports/premios-pagados'));
 const Dashboard = lazy(() => import('@/pages/Dashboard'));
+const TusDatos = lazy(() => import('@/pages/TusDatos'));
 
 export const BrowserRouter = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ export const BrowserRouter = createBrowserRouter([
         path: 'dashboard',
         element: <Suspense fallback={<Loading />}><Dashboard /></Suspense>
       },
+      {
+        path: 'tus-datos',
+        element: <Suspense fallback={<Loading />}><TusDatos /></Suspense>
+      }
     ]
   }
 ]);

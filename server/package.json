@@ -8,13 +8,14 @@
     "start": "node -r module-alias/register --env-file=.env ./dist/index.js"
   },
   "dependencies": {
+    "axios": "^1.10.0",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "module-alias": "^2.2.3",
     "mysql2": "^3.14.1",
     "oracledb": "^6.8.0",
     "sequelize": "^6.37.7",
-    "zod": "^3.25.75"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.9.0",
